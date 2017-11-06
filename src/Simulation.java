@@ -10,15 +10,14 @@ public class Simulation extends Canvas{
     private Graphics g;
     private Color colorBG;
     private Color colorBG2;
-    private Color colorB1;
-    private Color colorB2;
     private int marginX;
     private int marginY;
     private int widthS;
     private int heightS;
  
     // Simulation data
-    private List<Particle> particles = new ArrayList<>();
+    private List<Particle> particles = new ArrayList<>();  // List of all particles
+    private List<Injector> injectors = new ArrayList<>();  // List of injectors
     private double Lx, Ly;   // Size of the box
     private double px;       // Size of each pixel
     private double dt;       // Time step
@@ -38,8 +37,6 @@ public class Simulation extends Canvas{
 	  this.height  = D.height;
 	  this.colorBG = new Color(000,000,000);
 	  this.colorBG2 = new Color(100,100,100);
-	  this.colorB1 = new Color(255,000,000);
-	  this.colorB2 = new Color(000,255,000);
       this.Lx = Lx;
       this.Ly = Ly;
       double pxX = Lx/this.width;
@@ -50,30 +47,15 @@ public class Simulation extends Canvas{
       this.marginX = (int)((width - widthS)/2.0);
       this.marginY = (int)((height - heightS)/2.0);
       this.dt = 0.1;
-      this.ecPP = 1.0; 
-      this.ecPW = 1.0; 
-      this.GRAVITY = 0.0;
+      this.ecPP = 0.99; 
+      this.ecPW = 0.5; 
+      this.GRAVITY = 0.05;
     }
 
-    public void addParticles(int n, double R, double x1, double x2, double y1, double y2, double vx, double vy, double vth, int id) {
-      for (int i=0; i<n; i++) {
-        Particle B = new Particle();
-        B.R = R;
-        B.rx = x1 + (x2-x1)*Math.random();
-        B.ry = y1 + (y2-y1)*Math.random();
-        B.vx = vx + vth*(1 - 2*Math.random());
-        B.vy = vy + vth*(1 - 2*Math.random());
-        B.id = id;
-        B.Dpx = (int)(2*B.R/px);
-        if (B.Dpx < 2) B.Dpx = 2;
-        //B.R = 1;
-        //B.rx = (i+1)*Lx/4;
-        //B.ry = Ly/2 + (i-1)*0.05;
-        //B.vx = (1-i);
-        //B.vy = 0;
-        particles.add(B);
-      }
+    public void addParticles(TypeInj shape, TypeInj typeP, TypeInj typeV, int n, double R, double x1, double x2, double y1, double y2, double vx, double vy, double vth, int id) {
 
+      Injector inj = new Injector(shape, typeP, typeV,  R, x1, x2, y1, y2, vx, vy, vth, id);
+      inj.inject(px, n, particles);
       //System.out.println(particles.size());
     }
 
@@ -117,20 +99,24 @@ public class Simulation extends Canvas{
         B1.vy += GRAVITY*dt;
         if (B1.rx < B1.R) {
           B1.rx = B1.R;
-          B1.vx *= -1;
+          B1.vx *= -ecPW;
         } else if (B1.rx > Lx-B1.R) {
           B1.rx = Lx-B1.R;
-          B1.vx *= -1;
+          B1.vx *= -ecPW;
         }
         if (B1.ry < B1.R) {
           B1.ry = B1.R;
-          B1.vy *= -1;
+          B1.vy *= -ecPW;
         } else if (B1.ry > Ly-B1.R) {
           B1.ry = Ly-B1.R;
-          B1.vy *= -1;
+          B1.vy *= -ecPW;
         }
       }
       update();
+    }
+
+    void clear() {
+      particles.clear();
     }
 
 
@@ -155,9 +141,11 @@ public class Simulation extends Canvas{
  	  g.fillRect(marginX,marginY,widthS,heightS);	
       for (Particle p : particles) {
           if (p.id == 1) {
-	        g.setColor(colorB1);
-          } else {
-	        g.setColor(colorB2);
+	        g.setColor(Color.RED);
+          } else if (p.id == 2) {
+	        g.setColor(Color.GREEN);
+          } else if (p.id == 3) {
+	        g.setColor(Color.BLUE);
           }
           int x = marginX + (int)((p.rx-p.R)/px);
           int y = marginY + (int)((p.ry-p.R)/px);
