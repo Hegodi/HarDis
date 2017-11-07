@@ -41,7 +41,6 @@ class Window extends JFrame {
     JMenuItem addAbsMenuItem;
     JMenuItem addObsMenuItem;
 
-    JMenuItem visMenuItem;
     JMenuItem genMenuItem;
 
     JMenuItem tc1MenuItem;
@@ -82,10 +81,6 @@ class Window extends JFrame {
         genMenuItem = new JMenuItem("Settings");
         genMenuItem.addActionListener(eventHandler);
         simMenu.add(genMenuItem);
-
-        visMenuItem = new JMenuItem("Visualization");
-        visMenuItem.addActionListener(eventHandler);
-        simMenu.add(visMenuItem);
 
         simMenu.addSeparator();
 
@@ -229,8 +224,6 @@ class Window extends JFrame {
             WindowAddInjector win = new WindowAddInjector(mainWindow, simu);
         }else if (O == genMenuItem) {
             WindowSettings win = new WindowSettings(mainWindow, simu);
-        }else if (O == visMenuItem) {
-            WindowVisualization win = new WindowVisualization(mainWindow, simu);
         }else if (O == tc1MenuItem) {
           cases.defaultCase(simu);
         }else if (O == tc2MenuItem) {
