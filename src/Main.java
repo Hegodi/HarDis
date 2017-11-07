@@ -32,13 +32,17 @@ class Window extends JFrame {
     JMenuBar menuBar;
     JMenu helMenu;
     JMenu simMenu;
-    JMenu samMenu;
-    JMenuItem addInjMenuItem;
+    JMenu exaMenu;
     JMenuItem addParMenuItem;
+    JMenuItem addInjMenuItem;
     JMenuItem addAbsMenuItem;
     JMenuItem addObsMenuItem;
+    JMenuItem delParMenuItem;
+
     JMenuItem visMenuItem;
     JMenuItem genMenuItem;
+
+    JMenuItem tc1MenuItem;
 
     JMenuItem manMenuItem;
     JMenuItem codMenuItem;
@@ -50,7 +54,7 @@ class Window extends JFrame {
         this.setTitle("Hardis (Hard Disk simulation)");
         mainWindow = this;
         this.setLocation(0,0);
-        //this.setBounds(0,0,w,h);
+        this.setBounds(0,0,w,h);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	    this.setResizable(false);
         JPanel mainPan = new JPanel();
@@ -91,7 +95,18 @@ class Window extends JFrame {
         addAbsMenuItem.addActionListener(eventHandler);
         simMenu.add(addAbsMenuItem);
 
-        samMenu = new JMenu("Samples");
+        simMenu.addSeparator();
+
+        delParMenuItem = new JMenuItem("Delete particles");
+        delParMenuItem.addActionListener(eventHandler);
+        simMenu.add(delParMenuItem);
+
+
+        exaMenu = new JMenu("Examples");
+        tc1MenuItem = new JMenuItem("Case 1");
+        tc1MenuItem.addActionListener(eventHandler);
+        exaMenu.add(tc1MenuItem);
+
         helMenu = new JMenu("Help");
 
         manMenuItem = new JMenuItem("Manual");
@@ -103,7 +118,7 @@ class Window extends JFrame {
         helMenu.add(codMenuItem);
 
         menuBar.add(simMenu);
-        menuBar.add(samMenu);
+        menuBar.add(exaMenu);
         menuBar.add(helMenu);
 
         this.setJMenuBar(menuBar);
@@ -138,7 +153,7 @@ class Window extends JFrame {
         cycles = 0;
         setButtons(false);
 
-        this.pack();
+        //this.pack();
         this.setVisible(true);
 
 

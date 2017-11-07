@@ -19,6 +19,8 @@ class WindowSettings extends JFrame implements ActionListener{
     JTextField TxtGra;
     JTextField TxtECp;
     JTextField TxtECw;
+    JTextField TxtLx;
+    JTextField TxtLy;
     
 
     public WindowSettings(JFrame parent, Simulation simu) {
@@ -43,6 +45,22 @@ class WindowSettings extends JFrame implements ActionListener{
         double Gra = simu.getGra();
         double ECp = simu.getECp();
         double ECw = simu.getECw();
+        double Lx  = simu.getLx();
+        double Ly  = simu.getLy();
+
+        JPanel panel0 = new JPanel();
+        //panel1.setAlignmentX( Component.RIGHT_ALIGNMENT );
+        TxtLx = new JTextField(Double.toString(Lx));
+        TxtLx.setPreferredSize(new Dimension(50, 25));
+        TxtLy = new JTextField(Double.toString(Ly));
+        TxtLy.setPreferredSize(new Dimension(50, 25));
+        lbl1 = new JLabel("Size of the domain  Lx:");
+        lbl2 = new JLabel("Ly:");
+        panel0.add(lbl1);
+        panel0.add(TxtLx);
+        panel0.add(lbl2);
+        panel0.add(TxtLy);
+        panel.add(panel0);
 
         JPanel panel1 = new JPanel();
         //panel1.setAlignmentX( Component.RIGHT_ALIGNMENT );
@@ -94,9 +112,12 @@ class WindowSettings extends JFrame implements ActionListener{
           double ecPP = Double.valueOf(TxtECp.getText());
           double ecPW = Double.valueOf(TxtECw.getText());
           double Grav = Double.valueOf(TxtGra.getText());
+          double Lx   = Double.valueOf(TxtLx.getText());
+          double Ly   = Double.valueOf(TxtLy.getText());
           simu.setECp(ecPP);
           simu.setECw(ecPW);
           simu.setGRA(Grav);
+          simu.setL(Lx, Ly);
           simu.repaint();
           parent.setEnabled(true);
           this.dispose();

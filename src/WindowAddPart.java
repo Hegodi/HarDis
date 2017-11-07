@@ -50,10 +50,10 @@ class WindowAddPart extends JFrame implements ActionListener{
         String vx  = Double.toString(0.0);
         String vy  = Double.toString(0.0);
         String vth = Double.toString(0.1);
-        String x1  = Double.toString(Lx/4);
-        String x2  = Double.toString(3*Lx/4);
-        String y1  = Double.toString(Ly/4);
-        String y2  = Double.toString(3*Ly/4);
+        String x1  = Double.toString(0);
+        String x2  = Double.toString(Lx);
+        String y1  = Double.toString(0);
+        String y2  = Double.toString(Ly);
 
         JPanel panel1 = new JPanel();
         //panel1.setAlignmentX( Component.RIGHT_ALIGNMENT );

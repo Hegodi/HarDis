@@ -119,6 +119,21 @@ public class Simulation extends Canvas{
       particles.clear();
     }
 
+    public void initPx() {
+	  Dimension D = getSize();
+	  this.width = D.width;
+	  this.height  = D.height;
+      double pxX = Lx/this.width;
+      double pxY = Ly/this.height;
+      this.px = (pxX < pxY ? pxY : pxX);
+      this.widthS  = (int)(Lx/this.px);
+      this.heightS = (int)(Ly/this.px);
+      this.marginX = (int)((width - widthS)/2.0);
+      this.marginY = (int)((height - heightS)/2.0);
+      for (Particle p : particles) {
+        p.Dpx = (int)(2*p.R/px);
+      }
+    }
 
     double getLx() {return Lx;}
     double getLy() {return Ly;}
@@ -129,6 +144,12 @@ public class Simulation extends Canvas{
     void setECw(double ecPW){ this.ecPW = ecPW;}
     void setECp(double ecPP){ this.ecPP = ecPP;}
     void setGRA(double GRAVITY){ this.GRAVITY = GRAVITY;}
+    void setL(double Lx, double Ly) {
+      this.Lx = Lx; 
+      this.Ly = Ly;
+      initPx();
+      update();
+    }
     /////////////////////////////////////////////////////////////////
     // Graphics
     public void paint(Graphics g) {
