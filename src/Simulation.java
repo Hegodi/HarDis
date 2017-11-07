@@ -52,11 +52,9 @@ public class Simulation extends Canvas{
       this.GRAVITY = 0.05;
     }
 
-    public void addParticles(TypeInj shape, TypeInj typeP, TypeInj typeV, int n, double R, double x1, double x2, double y1, double y2, double vx, double vy, double vth, int id) {
-
-      Injector inj = new Injector(shape, typeP, typeV,  R, x1, x2, y1, y2, vx, vy, vth, id);
+    public void addParticles(int n, double R, double x1, double x2, double y1, double y2, double vx, double vy, double vth, int id) {
+      Injector inj = new Injector(R, x1, x2, y1, y2, vx, vy, vth, id);
       inj.inject(px, n, particles);
-      //System.out.println(particles.size());
     }
 
     void moveParticles() {

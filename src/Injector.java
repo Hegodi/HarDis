@@ -7,19 +7,13 @@ public class Injector {
   private double InjR;         // Radius of the cycle
   private double vx,vy;        // Drift velocity
   private double vth;          // Thermal velocity
-  private TypeInj shape;       // Shape of the injector
-  private TypeInj velDst;      // Velocity distribution
-  private TypeInj posDst;      // Particle distribution
   private int freq;            // Injection frequency (0 if only at the begining)
   private double R;            // Radius of the particle
   private int id;              // Id of the particles
 
   private Random rand;
 
-  public Injector(TypeInj shape, TypeInj disP, TypeInj disV, double R, double x1, double x2, double y1, double y2, double vx, double vy, double vth, int id) {
-    this.shape = shape;
-    this.posDst = disP;
-    this.velDst = disV;
+  public Injector(double R, double x1, double x2, double y1, double y2, double vx, double vy, double vth, int id) {
     this.R  = R;
     this.x1 = x1+R;
     this.x2 = x2-R;

@@ -189,6 +189,7 @@ class Window extends JFrame {
         BtnStart.setEnabled(!val);
         BtnStop.setEnabled(val);
         BtnReset.setEnabled(!val);
+        BtnStep.setEnabled(!val);
         if (val ) {
           LblInfo.setText("Running (" + cycles + " cycles)");
           infoPanel.setBackground(Color.GREEN);

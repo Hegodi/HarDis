@@ -44,8 +44,8 @@ public class PrescribedCases {
       double vx = 0.0;
       double vy = 0.0;
       double vth = 0.1;
-      simu.addParticles(TypeInj.RECTANGLE, TypeInj.MAXWELL, TypeInj.RANDOM, 200 , 0.2  , x1, x2, y1, y2,  vx, vy, vth, 1);
-      simu.addParticles(TypeInj.RECTANGLE, TypeInj.MAXWELL, TypeInj.RANDOM, 300 , 0.1 , x1, x2, y1, y2,  vx, vy, vth, 2);
+      simu.addParticles(200 , 0.2  , x1, x2, y1, y2,  vx, vy, vth, 1);
+      simu.addParticles(300 , 0.08 , x1, x2, y1, y2,  vx, vy, vth, 2);
       simu.repaint();
     }
 
@@ -69,7 +69,7 @@ public class PrescribedCases {
       double vx = 0.0;
       double vy = 0.0;
       double vth = 0.1;
-      simu.addParticles(TypeInj.RECTANGLE, TypeInj.MAXWELL, TypeInj.RANDOM, 1 , 1.0  , x1, x2, y1, y2,  vx, vy, vth, 1);
+      simu.addParticles(1 , 1.0  , x1, x2, y1, y2,  vx, vy, vth, 1);
       simu.repaint();
     }
 

@@ -19,7 +19,6 @@ class WindowAddPart extends JFrame implements ActionListener{
     JTextField TxtX2;
     JTextField TxtY1;
     JTextField TxtY2;
-    JComboBox ComVdi;
     JComboBox ComCol;
     
 
@@ -80,25 +79,27 @@ class WindowAddPart extends JFrame implements ActionListener{
         TxtVdx.setPreferredSize(new Dimension(50, 25));
         TxtVdy = new JTextField(vy);
         TxtVdy.setPreferredSize(new Dimension(50, 25));
-        lbl1 = new JLabel("Dift Velocity  x:");
+        TxtVth = new JTextField(vth);
+        TxtVth.setPreferredSize(new Dimension(50, 25));
+        lbl1 = new JLabel("Velocity  x:");
         lbl2 = new JLabel("y:");
+        lbl3 = new JLabel("th:");
         panel2.add(lbl1);
         panel2.add(TxtVdx);
         panel2.add(lbl2);
         panel2.add(TxtVdy);
+        panel2.add(lbl3);
+        panel2.add(TxtVth);
         panel.add(panel2);
 
-        JPanel panel3 = new JPanel();
-        //panel3.setAlignmentX( Component.RIGHT_ALIGNMENT );
-        TxtVth = new JTextField(vth);
-        TxtVth.setPreferredSize(new Dimension(50, 25));
-        String[] str = {"Maxwellian", "Mono-energetic"};
-        ComVdi = new JComboBox(str);
-        lbl1 = new JLabel("Thermal velocity");
-        panel3.add(lbl1);
-        panel3.add(TxtVth);
-        panel3.add(ComVdi);
-        panel.add(panel3);
+        //JPanel panel3 = new JPanel();
+        ////panel3.setAlignmentX( Component.RIGHT_ALIGNMENT );
+        //String[] str = {"Rectangle", "Circle"};
+        //ComDis = new JComboBox(str);
+        //lbl1 = new JLabel("Shape:");
+        //panel3.add(lbl1);
+        //panel3.add(ComDis);
+        //panel.add(panel3);
 
         JPanel panel4 = new JPanel();
         //panel4.setAlignmentX( Component.RIGHT_ALIGNMENT );
@@ -161,7 +162,7 @@ class WindowAddPart extends JFrame implements ActionListener{
           else if (strColor == "Blue")  id = 3;
 
 
-          simu.addParticles(TypeInj.RECTANGLE, TypeInj.MAXWELL, TypeInj.RANDOM, n , R , x1, x2, y1, y2,  vx, vy, vth, id);
+          simu.addParticles(n , R , x1, x2, y1, y2,  vx, vy, vth, id);
           simu.repaint();
           parent.setEnabled(true);
           this.dispose();
