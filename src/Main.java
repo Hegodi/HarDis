@@ -27,6 +27,7 @@ class Window extends JFrame {
     JButton BtnStart;
     JButton BtnStop;
     JButton BtnReset;
+    JButton BtnStep;
     JLabel  LblInfo;
     JPanel infoPanel;
     JFrame mainWindow;
@@ -46,6 +47,7 @@ class Window extends JFrame {
 
     JMenuItem tc1MenuItem;
     JMenuItem tc2MenuItem;
+    JMenuItem tc3MenuItem;
 
     JMenuItem manMenuItem;
     JMenuItem codMenuItem;
@@ -116,6 +118,10 @@ class Window extends JFrame {
         tc2MenuItem.addActionListener(eventHandler);
         exaMenu.add(tc2MenuItem);
 
+        tc3MenuItem = new JMenuItem("Test");
+        tc3MenuItem.addActionListener(eventHandler);
+        exaMenu.add(tc3MenuItem);
+
         helMenu = new JMenu("Help");
 
 
@@ -156,6 +162,10 @@ class Window extends JFrame {
         BtnReset.addActionListener(eventHandler);
         generalPanel.add(BtnReset);
 
+        BtnStep = new JButton("Step");
+        BtnStep.addActionListener(eventHandler);
+        generalPanel.add(BtnStep);
+
         mainPan.add(generalPanel);
         mainPan.add(simu);
         mainPan.add(infoPanel);
@@ -193,7 +203,6 @@ class Window extends JFrame {
       public void actionPerformed(ActionEvent e) {
         Object O = e.getSource();
         if (O == BtnStart) {
-          System.out.printf("Start\n");
           if (timer == null) {
             timer = new Timer(10, new ActionListener(){
             @Override
@@ -208,14 +217,16 @@ class Window extends JFrame {
           } 
 
         }else if (O == BtnStop) {
-          System.out.printf("Stop\n");
           if (timer != null) {
             timer.stop();
             timer = null;
             setButtons(false);
           }
+        }else if (O == BtnStep) {
+          simu.moveParticles(); 
+          cycles++;
+          if (cycles % 10 == 0) LblInfo.setText("Running (" + cycles + " cycles)");
         }else if (O == BtnReset) {
-          System.out.printf("Reset\n");
           cycles = 0;
           simu.clear();
           simu.update();
@@ -229,6 +240,8 @@ class Window extends JFrame {
           cases.defaultCase(simu);
         }else if (O == tc2MenuItem) {
           cases.twoSpecies(simu);
+        }else if (O == tc3MenuItem) {
+          cases.test(simu);
         }
       }
     }

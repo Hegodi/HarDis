@@ -21,6 +21,7 @@ class WindowSettings extends JFrame implements ActionListener{
     JTextField TxtECw;
     JTextField TxtLx;
     JTextField TxtLy;
+    JTextField TxtDt;
     
 
     public WindowSettings(JFrame parent, Simulation simu) {
@@ -47,6 +48,7 @@ class WindowSettings extends JFrame implements ActionListener{
         double ECw = simu.getECw();
         double Lx  = simu.getLx();
         double Ly  = simu.getLy();
+        double Dt  = simu.getDt();
 
         JPanel panel0 = new JPanel();
         //panel1.setAlignmentX( Component.RIGHT_ALIGNMENT );
@@ -88,6 +90,14 @@ class WindowSettings extends JFrame implements ActionListener{
         panel3.add(TxtECw);
         panel.add(panel3);
 
+        JPanel panel4 = new JPanel();
+        TxtDt = new JTextField(Double.toString(Dt));
+        TxtDt.setPreferredSize(new Dimension(50, 25));
+        lbl1 = new JLabel("Time step");
+        panel4.add(lbl1);
+        panel4.add(TxtDt);
+        panel.add(panel4);
+
         JPanel panelB = new JPanel();
         panelB.setLayout(new FlowLayout());
         panelB.add(BtnSav);        
@@ -114,10 +124,12 @@ class WindowSettings extends JFrame implements ActionListener{
           double Grav = Double.valueOf(TxtGra.getText());
           double Lx   = Double.valueOf(TxtLx.getText());
           double Ly   = Double.valueOf(TxtLy.getText());
+          double Dt   = Double.valueOf(TxtDt.getText());
           simu.setECp(ecPP);
           simu.setECw(ecPW);
           simu.setGRA(Grav);
           simu.setL(Lx, Ly);
+          simu.setDt(Dt);
           simu.repaint();
           parent.setEnabled(true);
           this.dispose();

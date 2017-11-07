@@ -94,22 +94,25 @@ public class Simulation extends Canvas{
             B2.vy = vp2*dpy + vn2*dny;
           }
         }
+      }
+      for(int p1=0; p1<np; p1++) {
+		Particle B1 = particles.get(p1);
         B1.rx += B1.vx*dt;
         B1.ry += B1.vy*dt;
         B1.vy += GRAVITY*dt;
-        if (B1.rx < B1.R) {
+        if (B1.rx <= B1.R) {
           B1.rx = B1.R;
-          B1.vx *= -ecPW;
-        } else if (B1.rx > Lx-B1.R) {
+          if(B1.vx < 0) B1.vx *= -ecPW;
+        } else if (B1.rx >= Lx-B1.R) {
           B1.rx = Lx-B1.R;
-          B1.vx *= -ecPW;
+          if(B1.vx > 0) B1.vx *= -ecPW;
         }
-        if (B1.ry < B1.R) {
+        if (B1.ry <= B1.R) {
           B1.ry = B1.R;
-          B1.vy *= -ecPW;
-        } else if (B1.ry > Ly-B1.R) {
+          if (B1.vy < 0) B1.vy *= -ecPW;
+        } else if (B1.ry >= Ly-B1.R) {
           B1.ry = Ly-B1.R;
-          B1.vy *= -ecPW;
+          if (B1.vy > 0) B1.vy *= -ecPW;
         }
       }
       update();
@@ -140,6 +143,7 @@ public class Simulation extends Canvas{
     double getGra() {return GRAVITY;}
     double getECp() {return ecPP;}
     double getECw() {return ecPW;}
+    double getDt() {return dt;}
 
     void setECw(double ecPW){ this.ecPW = ecPW;}
     void setECp(double ecPP){ this.ecPP = ecPP;}
@@ -150,6 +154,7 @@ public class Simulation extends Canvas{
       initPx();
       update();
     }
+    void setDt(double dt) { this.dt = dt; }
     /////////////////////////////////////////////////////////////////
     // Graphics
     public void paint(Graphics g) {
