@@ -122,6 +122,13 @@ public class Simulation extends Canvas{
 
     double getLx() {return Lx;}
     double getLy() {return Ly;}
+    double getGra() {return GRAVITY;}
+    double getECp() {return ecPP;}
+    double getECw() {return ecPW;}
+
+    void setECw(double ecPW){ this.ecPW = ecPW;}
+    void setECp(double ecPP){ this.ecPP = ecPP;}
+    void setGRA(double GRAVITY){ this.GRAVITY = GRAVITY;}
     /////////////////////////////////////////////////////////////////
     // Graphics
     public void paint(Graphics g) {

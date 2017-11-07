@@ -24,6 +24,7 @@ class WindowAddPart extends JFrame implements ActionListener{
     
 
     public WindowAddPart(JFrame parent, Simulation simu) {
+        this.setTitle("Add particles");
         this.parent = parent;
         this.simu = simu;
         this.setBounds(0,0,460,200);

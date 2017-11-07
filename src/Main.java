@@ -30,20 +30,24 @@ class Window extends JFrame {
     JFrame mainWindow;
 
     JMenuBar menuBar;
-    JMenu aboMenu;
-    JMenu setMenu;
+    JMenu helMenu;
     JMenu simMenu;
+    JMenu samMenu;
     JMenuItem addInjMenuItem;
     JMenuItem addParMenuItem;
     JMenuItem addAbsMenuItem;
     JMenuItem addObsMenuItem;
     JMenuItem visMenuItem;
     JMenuItem genMenuItem;
+
+    JMenuItem manMenuItem;
+    JMenuItem codMenuItem;
     Timer timer;
 
     long cycles;   // Number of cycles
 
     public Window(int w, int h) {
+        this.setTitle("Hardis (Hard Disk simulation)");
         mainWindow = this;
         this.setBounds(0,0,w,h);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -62,32 +66,44 @@ class Window extends JFrame {
         // Menu Bar
         menuBar = new JMenuBar();
 
-        aboMenu = new JMenu("About");
-   
-        setMenu = new JMenu("Settings");
+        simMenu = new JMenu("Simulation");
+
+        genMenuItem = new JMenuItem("Settings");
+        genMenuItem.addActionListener(eventHandler);
+        simMenu.add(genMenuItem);
+
         visMenuItem = new JMenuItem("Visualization");
         visMenuItem.addActionListener(eventHandler);
-        setMenu.add(visMenuItem);
-        genMenuItem = new JMenuItem("General settings");
-        genMenuItem.addActionListener(eventHandler);
-        setMenu.add(genMenuItem);
-        
-        simMenu = new JMenu("Simulation");
-        addParMenuItem = new JMenuItem("Particles");
+        simMenu.add(visMenuItem);
+
+        simMenu.addSeparator();
+
+        addParMenuItem = new JMenuItem("Add particles");
         addParMenuItem.addActionListener(eventHandler);
         simMenu.add(addParMenuItem);
 
-        addInjMenuItem = new JMenuItem("Injector");
+        addInjMenuItem = new JMenuItem("Add injector");
         addInjMenuItem.addActionListener(eventHandler);
         simMenu.add(addInjMenuItem);
 
-        addAbsMenuItem = new JMenuItem("Absorbing area");
+        addAbsMenuItem = new JMenuItem("Add Absorbing area");
         addAbsMenuItem.addActionListener(eventHandler);
         simMenu.add(addAbsMenuItem);
 
-        menuBar.add(setMenu);
+        samMenu = new JMenu("Samples");
+        helMenu = new JMenu("Help");
+
+        manMenuItem = new JMenuItem("Manual");
+        manMenuItem.addActionListener(eventHandler);
+        helMenu.add(manMenuItem);
+
+        codMenuItem = new JMenuItem("About the code");
+        codMenuItem.addActionListener(eventHandler);
+        helMenu.add(codMenuItem);
+
         menuBar.add(simMenu);
-        menuBar.add(aboMenu);
+        menuBar.add(samMenu);
+        menuBar.add(helMenu);
 
         this.setJMenuBar(menuBar);
 
@@ -176,6 +192,8 @@ class Window extends JFrame {
           simu.update();
         }else if (O == addParMenuItem) {
             WindowAddPart win = new WindowAddPart(mainWindow, simu);
+        }else if (O == genMenuItem) {
+            WindowSettings win = new WindowSettings(mainWindow, simu);
         }
       }
     }
