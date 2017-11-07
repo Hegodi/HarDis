@@ -22,6 +22,8 @@ public class Main {
 
 class Window extends JFrame {
     Simulation simu;
+    PrescribedCases cases;
+
     JButton BtnStart;
     JButton BtnStop;
     JButton BtnReset;
@@ -43,6 +45,7 @@ class Window extends JFrame {
     JMenuItem genMenuItem;
 
     JMenuItem tc1MenuItem;
+    JMenuItem tc2MenuItem;
 
     JMenuItem manMenuItem;
     JMenuItem codMenuItem;
@@ -65,6 +68,8 @@ class Window extends JFrame {
         simu = new Simulation();
         simu.setBounds(0,0,w,515);
         simu.init(40.0, 10.0);
+
+        cases = new PrescribedCases();
 
         EventHandler eventHandler = new EventHandler();
         
@@ -103,11 +108,16 @@ class Window extends JFrame {
 
 
         exaMenu = new JMenu("Examples");
-        tc1MenuItem = new JMenuItem("Case 1");
+        tc1MenuItem = new JMenuItem("Default");
         tc1MenuItem.addActionListener(eventHandler);
         exaMenu.add(tc1MenuItem);
 
+        tc2MenuItem = new JMenuItem("Two species");
+        tc2MenuItem.addActionListener(eventHandler);
+        exaMenu.add(tc2MenuItem);
+
         helMenu = new JMenu("Help");
+
 
         manMenuItem = new JMenuItem("Manual");
         manMenuItem.addActionListener(eventHandler);
@@ -153,10 +163,12 @@ class Window extends JFrame {
         cycles = 0;
         setButtons(false);
 
+
         //this.pack();
         this.setVisible(true);
 
 
+        cases.defaultCase(simu);
         /////////////// TEST
         //simu.addParticles(TypeInj.RECTANGLE, TypeInj.MAXWELL, TypeInj.RANDOM, 1000 , 0.05 , 0.0,  5.0, 2.5,  7.5,  1.0, 0.0, 0.0, 1);
         //simu.addParticles(TypeInj.RECTANGLE, TypeInj.MAXWELL, TypeInj.RANDOM, 1000 , 0.05 ,35.0, 40.0, 2.5,  7.5, -1.0, 0.0, 0.0, 2);
@@ -213,6 +225,10 @@ class Window extends JFrame {
             WindowSettings win = new WindowSettings(mainWindow, simu);
         }else if (O == visMenuItem) {
             WindowVisualization win = new WindowVisualization(mainWindow, simu);
+        }else if (O == tc1MenuItem) {
+          cases.defaultCase(simu);
+        }else if (O == tc2MenuItem) {
+          cases.twoSpecies(simu);
         }
       }
     }
