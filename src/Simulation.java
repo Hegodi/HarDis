@@ -120,6 +120,8 @@ public class Simulation extends Canvas{
     }
 
 
+    double getLx() {return Lx;}
+    double getLy() {return Ly;}
     /////////////////////////////////////////////////////////////////
     // Graphics
     public void paint(Graphics g) {
