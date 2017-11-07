@@ -15,6 +15,7 @@ class WindowSettings extends JFrame implements ActionListener{
 
     JButton BtnSav;
     JButton BtnCan;
+    JButton BtnDef;
 
     JTextField TxtGra;
     JTextField TxtECp;
@@ -38,8 +39,10 @@ class WindowSettings extends JFrame implements ActionListener{
 
         BtnSav = new JButton("Save");
         BtnCan = new JButton("Cancel");
+        BtnDef = new JButton("Default");
         BtnSav.addActionListener(this);
         BtnCan.addActionListener(this);
+        BtnDef.addActionListener(this);
 
         JLabel lbl1, lbl2, lbl3, lbl4;
 
@@ -102,6 +105,7 @@ class WindowSettings extends JFrame implements ActionListener{
         panelB.setLayout(new FlowLayout());
         panelB.add(BtnSav);        
         panelB.add(BtnCan);        
+        panelB.add(BtnDef);        
         panel.add(panelB);
 
         this.add(panel);
@@ -114,6 +118,21 @@ class WindowSettings extends JFrame implements ActionListener{
             parent.setEnabled(true);
           }
         });
+    }
+
+    public void setDefault() {
+      String ecPP = Double.toString(1.0);
+      String ecPW = Double.toString(0.5);
+      String Grav = Double.toString(0.05);
+      String Lx   = Double.toString(10.0);
+      String Ly   = Double.toString(10.0);
+      String Dt   = Double.toString(0.1);
+      TxtECp.setText(ecPP);
+      TxtECw.setText(ecPW);
+      TxtGra.setText(Grav);
+      TxtLx.setText(Lx);
+      TxtLy.setText(Ly);
+      TxtDt.setText(Dt);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -136,6 +155,8 @@ class WindowSettings extends JFrame implements ActionListener{
         } else if (O == BtnCan) {
           parent.setEnabled(true);
           this.dispose();
+        } else if (O == BtnDef) {
+          setDefault(); 
         }
     }
 }

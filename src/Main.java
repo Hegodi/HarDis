@@ -40,7 +40,6 @@ class Window extends JFrame {
     JMenuItem addInjMenuItem;
     JMenuItem addAbsMenuItem;
     JMenuItem addObsMenuItem;
-    JMenuItem delParMenuItem;
 
     JMenuItem visMenuItem;
     JMenuItem genMenuItem;
@@ -98,23 +97,16 @@ class Window extends JFrame {
         addInjMenuItem.addActionListener(eventHandler);
         simMenu.add(addInjMenuItem);
 
-        addAbsMenuItem = new JMenuItem("Add Absorbing area");
+        addAbsMenuItem = new JMenuItem("Add absorbing area");
         addAbsMenuItem.addActionListener(eventHandler);
         simMenu.add(addAbsMenuItem);
-
-        simMenu.addSeparator();
-
-        delParMenuItem = new JMenuItem("Delete particles");
-        delParMenuItem.addActionListener(eventHandler);
-        simMenu.add(delParMenuItem);
-
 
         exaMenu = new JMenu("Examples");
         tc1MenuItem = new JMenuItem("Default");
         tc1MenuItem.addActionListener(eventHandler);
         exaMenu.add(tc1MenuItem);
 
-        tc2MenuItem = new JMenuItem("Two species");
+        tc2MenuItem = new JMenuItem("Densities");
         tc2MenuItem.addActionListener(eventHandler);
         exaMenu.add(tc2MenuItem);
 
@@ -233,6 +225,8 @@ class Window extends JFrame {
           simu.update();
         }else if (O == addParMenuItem) {
             WindowAddPart win = new WindowAddPart(mainWindow, simu);
+        }else if (O == addInjMenuItem) {
+            WindowAddInjector win = new WindowAddInjector(mainWindow, simu);
         }else if (O == genMenuItem) {
             WindowSettings win = new WindowSettings(mainWindow, simu);
         }else if (O == visMenuItem) {
@@ -240,7 +234,7 @@ class Window extends JFrame {
         }else if (O == tc1MenuItem) {
           cases.defaultCase(simu);
         }else if (O == tc2MenuItem) {
-          cases.twoSpecies(simu);
+          cases.densities(simu);
         }else if (O == tc3MenuItem) {
           cases.test(simu);
         }

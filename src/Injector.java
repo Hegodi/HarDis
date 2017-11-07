@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.Random;
 public class Injector {
 
+  private int n;
   private double x1,x2,y1,y2;  // Location of the injector
   private double InjR;         // Radius of the cycle
   private double vx,vy;        // Drift velocity
@@ -13,7 +14,8 @@ public class Injector {
 
   private Random rand;
 
-  public Injector(double R, double x1, double x2, double y1, double y2, double vx, double vy, double vth, int id) {
+  public Injector(int n, double R, double x1, double x2, double y1, double y2, double vx, double vy, double vth, int id) {
+    this.n = n;
     this.R  = R;
     this.x1 = x1+R;
     this.x2 = x2-R;
@@ -23,10 +25,32 @@ public class Injector {
     this.vy  = vy;
     this.vth = vth;
     this.id = id;
+    this.freq = 0;
     rand = new Random(id);
   }
 
-  public void inject(double px, int n, List<Particle> particles) {
+  public Injector(int n, double R, double x1, double x2, double y1, double y2, double vx, double vy, double vth, int id, int freq) {
+    this.n = n;
+    this.R  = R;
+    this.x1 = x1+R;
+    this.x2 = x2-R;
+    this.y1 = y1+R;
+    this.y2 = y2-R;
+    this.vx  = vx;
+    this.vy  = vy;
+    this.vth = vth;
+    this.id = id;
+    this.freq = freq;
+    rand = new Random(id);
+  }
+
+  public double getX1() { return x1;}
+  public double getX2() { return x2;}
+  public double getY1() { return y1;}
+  public double getY2() { return y2;}
+  public int    getId() { return id;}
+
+  public void inject(double px, List<Particle> particles) {
     for (int i=0; i<n; i++) {
       Particle B = new Particle();
       B.R = R;
@@ -39,5 +63,9 @@ public class Injector {
       if (B.Dpx < 2) B.Dpx = 2;
         particles.add(B);
     }
+  }
+
+  public void inject(int cycle, double px, List<Particle> particles) {
+    if (cycle % freq == 0) inject(px, particles);
   }
 }

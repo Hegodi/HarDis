@@ -16,6 +16,7 @@ public class Simulation extends Canvas{
     private int heightS;
  
     // Simulation data
+    private int cycle = 0;
     private List<Particle> particles = new ArrayList<>();  // List of all particles
     private List<Injector> injectors = new ArrayList<>();  // List of injectors
     private double Lx, Ly;   // Size of the box
@@ -53,11 +54,20 @@ public class Simulation extends Canvas{
     }
 
     public void addParticles(int n, double R, double x1, double x2, double y1, double y2, double vx, double vy, double vth, int id) {
-      Injector inj = new Injector(R, x1, x2, y1, y2, vx, vy, vth, id);
-      inj.inject(px, n, particles);
+      Injector inj = new Injector(n, R, x1, x2, y1, y2, vx, vy, vth, id);
+      inj.inject(px, particles);
+    }
+
+    public void addInjector(int freq, int n, double R, double x1, double x2, double y1, double y2, double vx, double vy, double vth, int id) {
+      Injector inj = new Injector(n, R, x1, x2, y1, y2, vx, vy, vth, id, freq);
+      injectors.add(inj);
     }
 
     void moveParticles() {
+      for (Injector inj : injectors) {
+        inj.inject(cycle, px, particles);
+      }
+
       int np = particles.size();
       for(int p1=0; p1<np; p1++) {
 		Particle B1 = particles.get(p1);
@@ -113,11 +123,14 @@ public class Simulation extends Canvas{
           if (B1.vy > 0) B1.vy *= -ecPW;
         }
       }
+      cycle++;
       update();
     }
 
     void clear() {
       particles.clear();
+      injectors.clear();
+      cycle = 0;
     }
 
     public void initPx() {
@@ -172,6 +185,23 @@ public class Simulation extends Canvas{
  	  g.fillRect(0,0,width,height);	
 	  g.setColor(colorBG);
  	  g.fillRect(marginX,marginY,widthS,heightS);	
+
+      for (Injector inj : injectors) {
+	      int id = inj.getId();
+          if (id == 1) {
+	        g.setColor(Color.RED);
+          } else if (id == 2) {
+	        g.setColor(Color.GREEN);
+          } else if (id == 3) {
+	        g.setColor(Color.BLUE);
+          }
+          int x1 = marginX + (int)((inj.getX1())/px);
+          int y1 = marginY + (int)((inj.getY1())/px);
+          int x2 = marginX + (int)((inj.getX2())/px);
+          int y2 = marginY + (int)((inj.getY2())/px);
+          g.fillRect(x1,y1,(x2-x1),(y2-y1));
+      }
+
       for (Particle p : particles) {
           if (p.id == 1) {
 	        g.setColor(Color.RED);
@@ -184,6 +214,7 @@ public class Simulation extends Canvas{
           int y = marginY + (int)((p.ry-p.R)/px);
           g.fillOval(x,y,p.Dpx,p.Dpx);
       }
+
 	  gF.drawImage(buffer,0,0,this);
     }
 }

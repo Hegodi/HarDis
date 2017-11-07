@@ -24,13 +24,13 @@ public class PrescribedCases {
       simu.repaint();
     }
 
-    public void twoSpecies(Simulation simu) { 
+    public void densities(Simulation simu) { 
       simu.clear();
       double Lx = 10;
       double Ly = 10;
       double Grav = 0.05;
       double ecP = 1.0;
-      double ecW = 0.5;
+      double ecW = 0.8;
       double dt  = 0.1;
       simu.setL(Lx, Ly);
       simu.setGRA(Grav);
@@ -43,9 +43,10 @@ public class PrescribedCases {
       double y2 = Ly;
       double vx = 0.0;
       double vy = 0.0;
-      double vth = 0.1;
-      simu.addParticles(200 , 0.2  , x1, x2, y1, y2,  vx, vy, vth, 1);
-      simu.addParticles(300 , 0.08 , x1, x2, y1, y2,  vx, vy, vth, 2);
+      double vth = 0.0;
+      simu.addParticles(100 , 0.2 , x1, x2, y1, y2,  vx, vy, vth, 1);
+      simu.addParticles(200 , 0.1 , x1, x2, y1, y2,  vx, vy, vth, 2);
+      simu.addParticles(400 , 0.05, x1, x2, y1, y2,  vx, vy, vth, 3);
       simu.repaint();
     }
 
@@ -53,9 +54,9 @@ public class PrescribedCases {
       simu.clear();
       double Lx = 10;
       double Ly = 10;
-      double Grav = 0.05;
-      double ecP = 1.0;
-      double ecW = 1.0;
+      double Grav = 0.02;
+      double ecP = 0.5;
+      double ecW = 0.5;
       double dt  = 0.1;
       simu.setL(Lx, Ly);
       simu.setGRA(Grav);
@@ -63,13 +64,14 @@ public class PrescribedCases {
       simu.setECw(ecW);
       simu.setDt(dt);
       double x1 = 0;
-      double x2 = Lx;
+      double x2 = 1;
       double y1 = 0;
       double y2 = 1;
-      double vx = 0.0;
+      double vx = 0.3;
       double vy = 0.0;
       double vth = 0.1;
-      simu.addParticles(1 , 1.0  , x1, x2, y1, y2,  vx, vy, vth, 1);
+      simu.addInjector(10,1 , 0.1  , x1, x2, y1, y2,  vx, vy, vth, 1);
+      //simu.addParticles(1 , 1.0  , x1, x2, y1, y2,  vx, vy, vth, 1);
       simu.repaint();
     }
 
