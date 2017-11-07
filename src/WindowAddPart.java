@@ -42,11 +42,23 @@ class WindowAddPart extends JFrame implements ActionListener{
 
         JLabel lbl1, lbl2, lbl3, lbl4;
 
+        double Lx = simu.getLx();
+        double Ly = simu.getLy();
+        String np  = Integer.toString(100);
+        String r   = Double.toString(0.3);
+        String vx  = Double.toString(0.0);
+        String vy  = Double.toString(0.0);
+        String vth = Double.toString(0.1);
+        String x1  = Double.toString(Lx/4);
+        String x2  = Double.toString(3*Lx/4);
+        String y1  = Double.toString(Ly/4);
+        String y2  = Double.toString(3*Ly/4);
+
         JPanel panel1 = new JPanel();
         //panel1.setAlignmentX( Component.RIGHT_ALIGNMENT );
-        TxtNum = new JTextField("10");
+        TxtNum = new JTextField(np);
         TxtNum.setPreferredSize(new Dimension(50, 25));
-        TxtSiz = new JTextField("0.1");
+        TxtSiz = new JTextField(r);
         TxtSiz.setPreferredSize(new Dimension(50, 25));
         String[] strC = {"Red", "Blue", "Green"};
         ComCol = new JComboBox(strC);
@@ -63,9 +75,9 @@ class WindowAddPart extends JFrame implements ActionListener{
 
         JPanel panel2 = new JPanel();
         //panel2.setAlignmentX( Component.RIGHT_ALIGNMENT );
-        TxtVdx = new JTextField("0.0");
+        TxtVdx = new JTextField(vx);
         TxtVdx.setPreferredSize(new Dimension(50, 25));
-        TxtVdy = new JTextField("0.0");
+        TxtVdy = new JTextField(vy);
         TxtVdy.setPreferredSize(new Dimension(50, 25));
         lbl1 = new JLabel("Dift Velocity  x:");
         lbl2 = new JLabel("y:");
@@ -77,7 +89,7 @@ class WindowAddPart extends JFrame implements ActionListener{
 
         JPanel panel3 = new JPanel();
         //panel3.setAlignmentX( Component.RIGHT_ALIGNMENT );
-        TxtVth = new JTextField("0.1");
+        TxtVth = new JTextField(vth);
         TxtVth.setPreferredSize(new Dimension(50, 25));
         String[] str = {"Maxwellian", "Mono-energetic"};
         ComVdi = new JComboBox(str);
@@ -89,13 +101,13 @@ class WindowAddPart extends JFrame implements ActionListener{
 
         JPanel panel4 = new JPanel();
         //panel4.setAlignmentX( Component.RIGHT_ALIGNMENT );
-        TxtX1 = new JTextField("1.0");
+        TxtX1 = new JTextField(x1);
         TxtX1.setPreferredSize(new Dimension(40, 25));
-        TxtX2 = new JTextField("2.0");
+        TxtX2 = new JTextField(x2);
         TxtX2.setPreferredSize(new Dimension(40, 25));
-        TxtY1 = new JTextField("1.0");
+        TxtY1 = new JTextField(y1);
         TxtY1.setPreferredSize(new Dimension(40, 25));
-        TxtY2 = new JTextField("2.0");
+        TxtY2 = new JTextField(y2);
         TxtY2.setPreferredSize(new Dimension(40, 25));
         lbl1 = new JLabel("xmin:");
         lbl2 = new JLabel("xmax:");
@@ -131,7 +143,7 @@ class WindowAddPart extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         Object O = e.getSource();
         if (O == BtnAdd) {
-          int n  = Integer.valueOf(TxtNum.getText());
+          int n     = Integer.valueOf(TxtNum.getText());
           double R  = Double.valueOf(TxtSiz.getText());
           double x1 = Double.valueOf(TxtX1.getText());
           double x2 = Double.valueOf(TxtX2.getText());
