@@ -27,13 +27,13 @@ class WindowAddPart extends JFrame implements ActionListener{
         this.setTitle("Add particles");
         this.parent = parent;
         this.simu = simu;
-        this.setBounds(0,0,460,200);
+        this.setLocation(0,0);
+        //this.setBounds(0,0,460,200);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	    this.setResizable(false);
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 
-        this.setVisible(true);
         parent.setEnabled(false);
 
         BtnAdd = new JButton("Add");
@@ -124,7 +124,6 @@ class WindowAddPart extends JFrame implements ActionListener{
         panel4.add(TxtY2);
         panel.add(panel4);
 
-
         JPanel panelB = new JPanel();
         panelB.setLayout(new FlowLayout());
         panelB.add(BtnAdd);        
@@ -132,6 +131,8 @@ class WindowAddPart extends JFrame implements ActionListener{
         panel.add(panelB);
 
         this.add(panel);
+        this.pack();
+        this.setVisible(true);
 
         this.addWindowListener(new WindowAdapter()
         {

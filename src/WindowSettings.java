@@ -25,13 +25,12 @@ class WindowSettings extends JFrame implements ActionListener{
         this.setTitle("Settings");
         this.parent = parent;
         this.simu = simu;
-        this.setBounds(0,0,460,200);
+        this.setLocation(0,0);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	    this.setResizable(false);
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 
-        this.setVisible(true);
         parent.setEnabled(false);
 
         BtnSav = new JButton("Save");
@@ -78,6 +77,8 @@ class WindowSettings extends JFrame implements ActionListener{
         panel.add(panelB);
 
         this.add(panel);
+        this.pack();
+        this.setVisible(true);
 
         this.addWindowListener(new WindowAdapter()
         {

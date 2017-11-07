@@ -49,7 +49,8 @@ class Window extends JFrame {
     public Window(int w, int h) {
         this.setTitle("Hardis (Hard Disk simulation)");
         mainWindow = this;
-        this.setBounds(0,0,w,h);
+        this.setLocation(0,0);
+        //this.setBounds(0,0,w,h);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	    this.setResizable(false);
         JPanel mainPan = new JPanel();
@@ -137,6 +138,7 @@ class Window extends JFrame {
         cycles = 0;
         setButtons(false);
 
+        this.pack();
         this.setVisible(true);
 
 
@@ -194,6 +196,8 @@ class Window extends JFrame {
             WindowAddPart win = new WindowAddPart(mainWindow, simu);
         }else if (O == genMenuItem) {
             WindowSettings win = new WindowSettings(mainWindow, simu);
+        }else if (O == visMenuItem) {
+            WindowVisualization win = new WindowVisualization(mainWindow, simu);
         }
       }
     }
