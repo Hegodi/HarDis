@@ -28,9 +28,11 @@ class Window extends JFrame {
     JButton BtnStop;
     JButton BtnReset;
     JButton BtnStep;
+    JCheckBox CckDia;
     JLabel  LblInfo;
     JPanel infoPanel;
-    JFrame mainWindow;
+    Window mainWindow;
+    WindowDiagnostics winDia;
 
     JMenuBar menuBar;
     JMenu helMenu;
@@ -97,7 +99,7 @@ class Window extends JFrame {
         simMenu.add(addAbsMenuItem);
 
         exaMenu = new JMenu("Examples");
-        tc1MenuItem = new JMenuItem("Default");
+        tc1MenuItem = new JMenuItem("Flotation");
         tc1MenuItem.addActionListener(eventHandler);
         exaMenu.add(tc1MenuItem);
 
@@ -152,6 +154,10 @@ class Window extends JFrame {
         BtnStep = new JButton("Step");
         BtnStep.addActionListener(eventHandler);
         generalPanel.add(BtnStep);
+    
+        CckDia = new JCheckBox("Diagnostics");
+        CckDia.addActionListener(eventHandler);
+        generalPanel.add(CckDia);
 
         mainPan.add(generalPanel);
         mainPan.add(simu);
@@ -197,7 +203,10 @@ class Window extends JFrame {
             public void actionPerformed(ActionEvent e) {
               simu.moveParticles(); 
               cycles++;
-              if (cycles % 10 == 0) LblInfo.setText("Running (" + cycles + " cycles)");
+              if (cycles % 10 == 0) {
+                LblInfo.setText("Running (" + cycles + " cycles)");
+                simu.diagnostics();
+              }
             }
             });
             timer.start();
@@ -218,6 +227,11 @@ class Window extends JFrame {
           cycles = 0;
           simu.clear();
           simu.update();
+        }else if (O == CckDia) {
+            if (CckDia.isSelected())
+              winDia = new WindowDiagnostics(mainWindow, simu);
+            else 
+              winDia.dispose();
         }else if (O == addParMenuItem) {
             WindowAddPart win = new WindowAddPart(mainWindow, simu);
         }else if (O == addInjMenuItem) {
@@ -225,7 +239,7 @@ class Window extends JFrame {
         }else if (O == genMenuItem) {
             WindowSettings win = new WindowSettings(mainWindow, simu);
         }else if (O == tc1MenuItem) {
-          cases.defaultCase(simu);
+          cases.flotation(simu);
         }else if (O == tc2MenuItem) {
           cases.densities(simu);
         }else if (O == tc3MenuItem) {

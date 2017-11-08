@@ -5,7 +5,7 @@ import java.awt.event.*;
 
 class WindowAddInjector extends JFrame implements ActionListener{
     Simulation simu;
-    JFrame parent;
+    Window parent;
 
     JButton BtnAdd;
     JButton BtnCan;
@@ -22,8 +22,9 @@ class WindowAddInjector extends JFrame implements ActionListener{
     JTextField TxtY2;
     JComboBox ComCol;
     
+    double Lx, Ly;
 
-    public WindowAddInjector(JFrame parent, Simulation simu) {
+    public WindowAddInjector(Window parent, Simulation simu) {
         this.setTitle("Add injector");
         this.parent = parent;
         this.simu = simu;
@@ -43,8 +44,8 @@ class WindowAddInjector extends JFrame implements ActionListener{
 
         JLabel lbl1, lbl2, lbl3, lbl4;
 
-        double Lx = simu.getLx();
-        double Ly = simu.getLy();
+        Lx = simu.getLx();
+        Ly = simu.getLy();
         String np  = Integer.toString(5);
         String r   = Double.toString(0.1);
         String vx  = Double.toString(0.1);
@@ -174,7 +175,7 @@ class WindowAddInjector extends JFrame implements ActionListener{
           else if (strColor == "Blue")  id = 3;
 
 
-          simu.addInjector(freq, n , R , x1, x2, y1, y2,  vx, vy, vth, id);
+          simu.addInjector(freq, n , R , x1, x2, (Ly-y2), (Ly-y1),  vx, vy, vth, id);
           simu.repaint();
           parent.setEnabled(true);
           this.dispose();

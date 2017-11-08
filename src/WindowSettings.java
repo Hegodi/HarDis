@@ -11,7 +11,7 @@ import java.awt.event.*;
 
 class WindowSettings extends JFrame implements ActionListener{
     Simulation simu;
-    JFrame parent;
+    Window parent;
 
     JButton BtnSav;
     JButton BtnCan;
@@ -25,7 +25,7 @@ class WindowSettings extends JFrame implements ActionListener{
     JTextField TxtDt;
     
 
-    public WindowSettings(JFrame parent, Simulation simu) {
+    public WindowSettings(Window parent, Simulation simu) {
         this.setTitle("Settings");
         this.parent = parent;
         this.simu = simu;
@@ -46,7 +46,7 @@ class WindowSettings extends JFrame implements ActionListener{
 
         JLabel lbl1, lbl2, lbl3, lbl4;
 
-        double Gra = simu.getGra();
+        double Gra = -simu.getGra();
         double ECp = simu.getECp();
         double ECw = simu.getECw();
         double Lx  = simu.getLx();
@@ -140,7 +140,7 @@ class WindowSettings extends JFrame implements ActionListener{
         if (O == BtnSav) {
           double ecPP = Double.valueOf(TxtECp.getText());
           double ecPW = Double.valueOf(TxtECw.getText());
-          double Grav = Double.valueOf(TxtGra.getText());
+          double Grav = -Double.valueOf(TxtGra.getText());
           double Lx   = Double.valueOf(TxtLx.getText());
           double Ly   = Double.valueOf(TxtLy.getText());
           double Dt   = Double.valueOf(TxtDt.getText());

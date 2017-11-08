@@ -5,7 +5,7 @@ import java.awt.event.*;
 
 class WindowAddPart extends JFrame implements ActionListener{
     Simulation simu;
-    JFrame parent;
+    Window parent;
 
     JButton BtnAdd;
     JButton BtnCan;
@@ -21,8 +21,9 @@ class WindowAddPart extends JFrame implements ActionListener{
     JTextField TxtY2;
     JComboBox ComCol;
     
+    double Lx, Ly;
 
-    public WindowAddPart(JFrame parent, Simulation simu) {
+    public WindowAddPart(Window parent, Simulation simu) {
         this.setTitle("Add particles");
         this.parent = parent;
         this.simu = simu;
@@ -42,8 +43,8 @@ class WindowAddPart extends JFrame implements ActionListener{
 
         JLabel lbl1, lbl2, lbl3, lbl4;
 
-        double Lx = simu.getLx();
-        double Ly = simu.getLy();
+        Lx = simu.getLx();
+        Ly = simu.getLy();
         String np  = Integer.toString(100);
         String r   = Double.toString(0.3);
         String vx  = Double.toString(0.0);
@@ -60,7 +61,7 @@ class WindowAddPart extends JFrame implements ActionListener{
         TxtNum.setPreferredSize(new Dimension(50, 25));
         TxtSiz = new JTextField(r);
         TxtSiz.setPreferredSize(new Dimension(50, 25));
-        String[] strC = {"Red", "Blue", "Green"};
+        String[] strC = {"Red", "Blue", "Green", "Yellow"};
         ComCol = new JComboBox(strC);
         lbl1 = new JLabel("Number:");
         lbl2 = new JLabel("Radius:");        
@@ -155,14 +156,15 @@ class WindowAddPart extends JFrame implements ActionListener{
           double vx = Double.valueOf(TxtVdx.getText());
           double vy = Double.valueOf(TxtVdy.getText());
           double vth = Double.valueOf(TxtVth.getText());
-          int id = 1;
+          int id = 0;
           String strColor = (String)ComCol.getSelectedItem();
-          if      (strColor == "Red")   id = 1;
-          else if (strColor == "Green") id = 2;
-          else if (strColor == "Blue")  id = 3;
+          if      (strColor == "Red")    id = 1;
+          else if (strColor == "Green")  id = 2;
+          else if (strColor == "Blue")   id = 3;
+          else if (strColor == "Yellow") id = 4;
 
 
-          simu.addParticles(n , R , x1, x2, y1, y2,  vx, vy, vth, id);
+          simu.addParticles(n , R , x1, x2, (Ly-y2), (Ly-y1),  vx, vy, vth, id);
           simu.repaint();
           parent.setEnabled(true);
           this.dispose();
