@@ -48,6 +48,7 @@ class Window extends JFrame {
     JMenuItem tc1MenuItem;
     JMenuItem tc2MenuItem;
     JMenuItem tc3MenuItem;
+    JMenuItem tc4MenuItem;
 
     JMenuItem manMenuItem;
     JMenuItem codMenuItem;
@@ -107,9 +108,13 @@ class Window extends JFrame {
         tc2MenuItem.addActionListener(eventHandler);
         exaMenu.add(tc2MenuItem);
 
-        tc3MenuItem = new JMenuItem("Test");
+        tc3MenuItem = new JMenuItem("Thermalization");
         tc3MenuItem.addActionListener(eventHandler);
         exaMenu.add(tc3MenuItem);
+
+        tc4MenuItem = new JMenuItem("Test");
+        tc4MenuItem.addActionListener(eventHandler);
+        exaMenu.add(tc4MenuItem);
 
         helMenu = new JMenu("Help");
 
@@ -252,6 +257,8 @@ class Window extends JFrame {
         }else if (O == tc2MenuItem) {
           cases.density2(simu);
         }else if (O == tc3MenuItem) {
+          cases.thermalization(simu);
+        }else if (O == tc4MenuItem) {
           cases.test(simu);
         }
       }

@@ -92,6 +92,24 @@ public class PrescribedCases {
       simu.repaint();
     }
 
+    public void thermalization(Simulation simu) { 
+      simu.clear();
+      double Lx = 10;
+      double Ly = 10;
+      double Grav = 0.0;
+      double ecP = 1.0;
+      double ecW = 1.0;
+      double dt  = 0.005;
+      simu.setL(Lx, Ly);
+      simu.setGRA(Grav);
+      simu.setECp(ecP);
+      simu.setECw(ecW);
+      simu.setDt(dt);
+      simu.addParticles(100 , 0.1  , 0, Lx, 0, Ly,  0.0, 0.0, 0.0, 4);
+      simu.addParticles(100 , 0.1  , 0, Lx, 0, Ly,  0.0, 0.0, 2.0 , 3);
+      simu.repaint();
+    }
+
     public void test(Simulation simu) { 
       simu.clear();
       double Lx = 10;
