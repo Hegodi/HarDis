@@ -220,9 +220,14 @@ public class Simulation extends Canvas{
         N[p.id-1]++;
       }
       for(int i=0; i<MAX_ID; i++) {
+        if (N[i] > 0) K[i]/=N[i];
         Ke.get(i).add(K[i]);
         Np.get(i).add(N[i]);
       }
+    }
+
+    public List getKe(int s) {
+      return Ke.get(s);
     }
 
     void clear() {
@@ -257,6 +262,7 @@ public class Simulation extends Canvas{
     double getECp() {return ecPP;}
     double getECw() {return ecPW;}
     double getDt() {return dt;}
+    int getCycle() {return cycle;}
 
     void setECw(double ecPW){ this.ecPW = ecPW;}
     void setECp(double ecPP){ this.ecPP = ecPP;}
@@ -306,13 +312,13 @@ public class Simulation extends Canvas{
 
       for (Particle p : particles) {
           if (p.id == 1) {
-	        g.setColor(Color.RED);
+	        g.setColor(MyColors.Id1);
           } else if (p.id == 2) {
-	        g.setColor(Color.GREEN);
+	        g.setColor(MyColors.Id2);
           } else if (p.id == 3) {
-	        g.setColor(Color.BLUE);
+	        g.setColor(MyColors.Id3);
           } else if (p.id == 4) {
-	        g.setColor(Color.YELLOW);
+	        g.setColor(MyColors.Id4);
           }
           int x = marginX + (int)((p.rx-p.R)/px);
           int y = marginY + (int)((p.ry-p.R)/px);

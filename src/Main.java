@@ -53,7 +53,7 @@ class Window extends JFrame {
     JMenuItem codMenuItem;
     Timer timer;
 
-    long cycles;   // Number of cycles
+    int cycles;   // Number of cycles
 
     public Window(int w, int h) {
         this.setTitle("Hardis (Hard Disk simulation)");
@@ -172,10 +172,14 @@ class Window extends JFrame {
 
 
         cases.defaultCase(simu);
-        /////////////// TEST
-        //simu.addParticles(TypeInj.RECTANGLE, TypeInj.MAXWELL, TypeInj.RANDOM, 1000 , 0.05 , 0.0,  5.0, 2.5,  7.5,  1.0, 0.0, 0.0, 1);
-        //simu.addParticles(TypeInj.RECTANGLE, TypeInj.MAXWELL, TypeInj.RANDOM, 1000 , 0.05 ,35.0, 40.0, 2.5,  7.5, -1.0, 0.0, 0.0, 2);
-        //simu.addParticles(2000 , 0.04, 0.0, 2.0, 8.0, 10.0, 0.1, -0.1, 0.0);
+        this.addWindowListener(new WindowAdapter()
+        {
+          public void windowClosing(WindowEvent e) {
+            if (CckDia.isSelected()) winDia.dispose();
+            
+          }
+        });
+
     }
 
     void setButtons(boolean val) {
@@ -209,6 +213,7 @@ class Window extends JFrame {
               if (cycles % 10 == 0) {
                 LblInfo.setText("Running (" + cycles + " cycles)");
                 simu.diagnostics();
+                if (CckDia.isSelected()) winDia.updateValues();
               }
             }
             });
@@ -230,6 +235,7 @@ class Window extends JFrame {
           cycles = 0;
           simu.clear();
           simu.update();
+          if (CckDia.isSelected()) winDia.clear();
         }else if (O == CckDia) {
             if (CckDia.isSelected())
               winDia = new WindowDiagnostics(mainWindow, simu);
