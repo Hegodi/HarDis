@@ -99,11 +99,11 @@ class Window extends JFrame {
         simMenu.add(addAbsMenuItem);
 
         exaMenu = new JMenu("Examples");
-        tc1MenuItem = new JMenuItem("Flotation");
+        tc1MenuItem = new JMenuItem("Density 1");
         tc1MenuItem.addActionListener(eventHandler);
         exaMenu.add(tc1MenuItem);
 
-        tc2MenuItem = new JMenuItem("Densities");
+        tc2MenuItem = new JMenuItem("Density 2");
         tc2MenuItem.addActionListener(eventHandler);
         exaMenu.add(tc2MenuItem);
 
@@ -183,6 +183,9 @@ class Window extends JFrame {
         BtnStop.setEnabled(val);
         BtnReset.setEnabled(!val);
         BtnStep.setEnabled(!val);
+        simMenu.setEnabled(!val);
+        exaMenu.setEnabled(!val);
+        helMenu.setEnabled(!val);
         if (val ) {
           LblInfo.setText("Running (" + cycles + " cycles)");
           infoPanel.setBackground(Color.GREEN);
@@ -239,9 +242,9 @@ class Window extends JFrame {
         }else if (O == genMenuItem) {
             WindowSettings win = new WindowSettings(mainWindow, simu);
         }else if (O == tc1MenuItem) {
-          cases.flotation(simu);
+          cases.density1(simu);
         }else if (O == tc2MenuItem) {
-          cases.densities(simu);
+          cases.density2(simu);
         }else if (O == tc3MenuItem) {
           cases.test(simu);
         }

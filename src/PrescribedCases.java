@@ -24,29 +24,7 @@ public class PrescribedCases {
       simu.repaint();
     }
 
-    public void densities2(Simulation simu) { 
-      simu.clear();
-      double Lx = 10;
-      double Ly = 10;
-      double Grav = 0.05;
-      double ecP = 1.0;
-      double ecW = 1.0;
-      double dt  = 0.08;
-      simu.setL(Lx, Ly);
-      simu.setGRA(Grav);
-      simu.setECp(ecP);
-      simu.setECw(ecW);
-      simu.setDt(dt);
-      double vx = 0.0;
-      double vy = 0.0;
-      double vth = 0.0;
-      simu.addParticles(30  , 0.4 , 0, Lx,  8, 10,  vx, vy, vth, 1);
-      simu.addParticles(150 , 0.2 , 0, Lx,  6,  8,  vx, vy, vth, 2);
-      simu.addParticles(300 , 0.1 , 0, Lx,  4,  6,  vx, vy, vth, 3);
-      simu.repaint();
-    }
-
-    public void densities(Simulation simu) { 
+    public void density1(Simulation simu) { 
       simu.clear();
       double Lx = 10;
       double Ly = 10;
@@ -72,7 +50,7 @@ public class PrescribedCases {
       simu.repaint();
     }
 
-    public void flotation(Simulation simu) { 
+    public void density2(Simulation simu) { 
       simu.clear();
       double Lx = 10;
       double Ly = 10;
