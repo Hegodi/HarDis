@@ -254,12 +254,16 @@ class Window extends JFrame {
             WindowSettings win = new WindowSettings(mainWindow, simu);
         }else if (O == tc1MenuItem) {
           cases.density1(simu);
+          if (CckDia.isSelected()) winDia.clear();
         }else if (O == tc2MenuItem) {
           cases.density2(simu);
+          if (CckDia.isSelected()) winDia.clear();
         }else if (O == tc3MenuItem) {
           cases.thermalization(simu);
+          if (CckDia.isSelected()) winDia.clear();
         }else if (O == tc4MenuItem) {
           cases.test(simu);
+          if (CckDia.isSelected()) winDia.clear();
         }
       }
     }

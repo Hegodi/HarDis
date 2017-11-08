@@ -46,15 +46,15 @@ class WindowAddInjector extends JFrame implements ActionListener{
 
         Lx = simu.getLx();
         Ly = simu.getLy();
-        String np  = Integer.toString(5);
+        String np  = Integer.toString(1);
         String r   = Double.toString(0.1);
-        String vx  = Double.toString(0.1);
+        String vx  = Double.toString(0.2);
         String vy  = Double.toString(0.0);
         String vth = Double.toString(0.1);
         String x1  = Double.toString(0);
         String x2  = Double.toString(1.0);
-        String y1  = Double.toString(0);
-        String y2  = Double.toString(1.0);
+        String y1  = Double.toString(Ly-2);
+        String y2  = Double.toString(Ly-1);
         String freq = Integer.toString(10);
 
         JPanel panel0 = new JPanel();
@@ -72,7 +72,7 @@ class WindowAddInjector extends JFrame implements ActionListener{
         TxtNum.setPreferredSize(new Dimension(50, 25));
         TxtSiz = new JTextField(r);
         TxtSiz.setPreferredSize(new Dimension(50, 25));
-        String[] strC = {"Red", "Blue", "Green"};
+        String[] strC = {MyColors.nameId1, MyColors.nameId2, MyColors.nameId3, MyColors.nameId4};
         ComCol = new JComboBox(strC);
         lbl1 = new JLabel("Number:");
         lbl2 = new JLabel("Radius:");        
@@ -170,9 +170,10 @@ class WindowAddInjector extends JFrame implements ActionListener{
           int freq = Integer.valueOf(TxtFreq.getText());
           int id = 1;
           String strColor = (String)ComCol.getSelectedItem();
-          if      (strColor == "Red")   id = 1;
-          else if (strColor == "Green") id = 2;
-          else if (strColor == "Blue")  id = 3;
+          if      (strColor == MyColors.nameId1) id = 1;
+          else if (strColor == MyColors.nameId2) id = 2;
+          else if (strColor == MyColors.nameId3) id = 3;
+          else if (strColor == MyColors.nameId4) id = 4;
 
 
           simu.addInjector(freq, n , R , x1, x2, (Ly-y2), (Ly-y1),  vx, vy, vth, id);

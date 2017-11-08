@@ -36,10 +36,10 @@ class WindowDiagnostics extends JFrame implements ActionListener{
         BtnClo.addActionListener(this);
 
         JPanel panel1 = new JPanel();
-        CckId1 = new JCheckBox("Red");
-        CckId2 = new JCheckBox("Blue");
-        CckId3 = new JCheckBox("Green");
-        CckId4 = new JCheckBox("Yellow");
+        CckId1 = new JCheckBox(MyColors.nameId1);
+        CckId2 = new JCheckBox(MyColors.nameId2);
+        CckId3 = new JCheckBox(MyColors.nameId3);
+        CckId4 = new JCheckBox(MyColors.nameId4);
         CckId1.setSelected(true);
         CckId2.setSelected(true);
         CckId3.setSelected(true);
@@ -156,7 +156,7 @@ class WindowDiagnostics extends JFrame implements ActionListener{
             }
           }
         }
-        this.ymax = ((int)(max/0.5)+1)*0.5;
+        this.ymax = ((int)(max/0.1)+1)*0.1;
         setScale(scaT, 0, ymax);
         n = 0;
         for (int i=0; i<ct; i++) {

@@ -61,7 +61,7 @@ class WindowAddPart extends JFrame implements ActionListener{
         TxtNum.setPreferredSize(new Dimension(50, 25));
         TxtSiz = new JTextField(r);
         TxtSiz.setPreferredSize(new Dimension(50, 25));
-        String[] strC = {"Red", "Blue", "Green", "Yellow"};
+        String[] strC = {MyColors.nameId1, MyColors.nameId2, MyColors.nameId3, MyColors.nameId4};
         ComCol = new JComboBox(strC);
         lbl1 = new JLabel("Number:");
         lbl2 = new JLabel("Radius:");        
@@ -158,10 +158,10 @@ class WindowAddPart extends JFrame implements ActionListener{
           double vth = Double.valueOf(TxtVth.getText());
           int id = 0;
           String strColor = (String)ComCol.getSelectedItem();
-          if      (strColor == "Red")    id = 1;
-          else if (strColor == "Green")  id = 2;
-          else if (strColor == "Blue")   id = 3;
-          else if (strColor == "Yellow") id = 4;
+          if      (strColor == MyColors.nameId1) id = 1;
+          else if (strColor == MyColors.nameId2) id = 2;
+          else if (strColor == MyColors.nameId3) id = 3;
+          else if (strColor == MyColors.nameId4) id = 4;
 
 
           simu.addParticles(n , R , x1, x2, (Ly-y2), (Ly-y1),  vx, vy, vth, id);
