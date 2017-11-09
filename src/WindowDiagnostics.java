@@ -10,10 +10,8 @@ class WindowDiagnostics extends JFrame implements ActionListener{
     Window parent;
 
     JButton BtnClo;
-    JCheckBox CckId1;
-    JCheckBox CckId2;
-    JCheckBox CckId3;
-    JCheckBox CckId4;
+    JCheckBox[] CckId;
+    int Ncck;
     String title;
     Monitor monitor;
 
@@ -37,22 +35,18 @@ class WindowDiagnostics extends JFrame implements ActionListener{
         BtnClo.addActionListener(this);
 
         JPanel panel1 = new JPanel();
-        CckId1 = new JCheckBox(MyColors.nameId1);
-        CckId2 = new JCheckBox(MyColors.nameId2);
-        CckId3 = new JCheckBox(MyColors.nameId3);
-        CckId4 = new JCheckBox(MyColors.nameId4);
-        CckId1.setSelected(true);
-        CckId2.setSelected(true);
-        CckId3.setSelected(true);
-        CckId4.setSelected(true);
-        CckId1.addActionListener(this);
-        CckId2.addActionListener(this);
-        CckId3.addActionListener(this);
-        CckId4.addActionListener(this);
-        panel1.add(CckId1);
-        panel1.add(CckId2);
-        panel1.add(CckId3);
-        panel1.add(CckId4);
+        Ncck = 5;
+        CckId = new JCheckBox[Ncck];
+        CckId[0] = new JCheckBox(MyColors.nameId1);
+        CckId[1] = new JCheckBox(MyColors.nameId2);
+        CckId[2] = new JCheckBox(MyColors.nameId3);
+        CckId[3] = new JCheckBox(MyColors.nameId4);
+        CckId[4] = new JCheckBox("All");
+        for(int i=0; i<Ncck; i++) {
+          CckId[i].setSelected(true);
+          CckId[i].addActionListener(this);
+          panel1.add(CckId[i]);
+        }
         panel.add(panel1);
 
         title = "KINETIC ENERGY";
@@ -92,8 +86,10 @@ class WindowDiagnostics extends JFrame implements ActionListener{
         if (O == BtnClo) {
            parent.CckDia.setSelected(false);
            this.dispose();
-        } else if (O == CckId1 || O == CckId2 || O == CckId3 || O == CckId4) {
-           this.updateValues();
+        } else {
+          for(int i=0; i<Ncck; i++) {
+           if (O == CckId[i]) monitor.updateValues();
+          }
         }
     }
 
@@ -108,6 +104,8 @@ class WindowDiagnostics extends JFrame implements ActionListener{
       int[] Y2;
       int[] Y3;
       int[] Y4;
+      int[] Y5;
+      int[][] Y;
       int n;
 
       int xlen, ylen;
@@ -131,6 +129,8 @@ class WindowDiagnostics extends JFrame implements ActionListener{
         this.Y2 = new int[xlen];
         this.Y3 = new int[xlen];
         this.Y4 = new int[xlen];
+        this.Y5 = new int[xlen];
+        this.Y = new int[Ncck][xlen];
  
         this.scaT = 1;
         
@@ -148,37 +148,30 @@ class WindowDiagnostics extends JFrame implements ActionListener{
 
       public void updateValues() {
         double max = 0;
-        int ct = simu.getKe(1).size();
-        for (int j=0; j<4; j++) {
-          List<Double> Ke = simu.getKe(j);
-          for (int i=0; i<ct; i++) {
-            if (i % scaT == 0) {
-              if (Ke.get(i) > max) max = Ke.get(i);
+        for (int j=0; j<Ncck; j++) {
+          if(CckId[j].isSelected()) {
+            int ct = simu.getKe(j).size();
+            List<Double> Ke = simu.getKe(j);
+            for (int i=0; i<ct; i++) {
+              if (i % scaT == 0) {
+                if (Ke.get(i) > max) max = Ke.get(i);
+              }
             }
           }
         }
         this.ymax = ((int)(max/0.1)+1)*0.1;
         setScale(scaT, 0, ymax);
-        n = 0;
-        for (int i=0; i<ct; i++) {
-          if (i % scaT == 0) {
-			if (parent.CckId1.isSelected()) {
-              List<Double> K = simu.getKe(0);
-              Y1[n] = y0 + ylen - (int)(K.get(i)*scaY);
+        for (int j=0; j<Ncck; j++) {
+          if (parent.CckId[j].isSelected()) {
+            int ct = simu.getKe(j).size();
+            List<Double> K = simu.getKe(j);
+            n = 0;
+            for (int i=0; i<ct; i++) {
+              if (i % scaT == 0) {
+                Y[j][n] = y0 + ylen - (int)(K.get(i)*scaY);
+                n++;
+              }
             }
-			if (parent.CckId2.isSelected()) {
-              List<Double> K = simu.getKe(1);
-              Y2[n] = y0 + ylen - (int)(K.get(i)*scaY);
-            }
-			if (parent.CckId3.isSelected()) {
-              List<Double> K = simu.getKe(2);
-              Y3[n] = y0 + ylen - (int)(K.get(i)*scaY);
-            }
-			if (parent.CckId4.isSelected()) {
-              List<Double> K = simu.getKe(3);
-              Y4[n] = y0 + ylen - (int)(K.get(i)*scaY);
-            }
-            n++;
             if (n >= xlen) {
               this.scaT *= 2;
               updateValues();
@@ -213,21 +206,16 @@ class WindowDiagnostics extends JFrame implements ActionListener{
         g.fillRect(x0,height - y0,xlen,2);
         g.drawString(title, width-150,20);
 
-        if (parent.CckId1.isSelected()) {
-          g.setColor(MyColors.Id1);
-          for(int i=1; i<n; i++) g.drawLine(x0+(i-1),Y1[i-1],x0+i,Y1[i]);
-        }
-        if (parent.CckId2.isSelected()) {
-          g.setColor(MyColors.Id2);
-          for(int i=1; i<n; i++) g.drawLine(x0+(i-1),Y2[i-1],x0+i,Y2[i]);
-        }
-        if (parent.CckId3.isSelected()) {
-          g.setColor(MyColors.Id3);
-          for(int i=1; i<n; i++) g.drawLine(x0+(i-1),Y3[i-1],x0+i,Y3[i]);
-        }
-        if (parent.CckId4.isSelected()) {
-          g.setColor(MyColors.Id4);
-          for(int i=1; i<n; i++) g.drawLine(x0+(i-1),Y4[i-1],x0+i,Y4[i]);
+      
+        for (int j=0; j<Ncck; j++) {
+          if (parent.CckId[j].isSelected()) {
+            if (j == 0)      g.setColor(MyColors.Id1);
+            else if (j == 1) g.setColor(MyColors.Id2);
+            else if (j == 2) g.setColor(MyColors.Id3);
+            else if (j == 3) g.setColor(MyColors.Id4);
+            else if (j == 4) g.setColor(MyColors.Id5);
+            for(int i=1; i<n; i++) g.drawLine(x0+(i-1),Y[j][i-1],x0+i,Y[j][i]);
+          }
         }
 	    gF.drawImage(buffer,0,0,this);
       }

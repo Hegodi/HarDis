@@ -63,6 +63,8 @@ public class Simulation extends Canvas{
       Ke.add(new ArrayList<Double>());
       Ke.add(new ArrayList<Double>());
       Ke.add(new ArrayList<Double>());
+      Ke.add(new ArrayList<Double>());
+      Np.add(new ArrayList<Integer>());
       Np.add(new ArrayList<Integer>());
       Np.add(new ArrayList<Integer>());
       Np.add(new ArrayList<Integer>());
@@ -139,6 +141,8 @@ public class Simulation extends Canvas{
           B1.ry = Ly-B1.R;
           if (B1.vy > 0) B1.vy *= -ecPW;
         }
+//if (B1.rx < 0.15 && B1.ry < 0.15) System.out.println("["+p1+"] x:"+B1.rx+" y:"+B1.ry+" vx:"+B1.vx+" vy:"+B1.vy);
+//if (p1==73) System.out.println("["+p1+"] x:"+B1.rx+" y:"+B1.ry+" vx:"+B1.vx+" vy:"+B1.vy);
       }
       cycle++;
       update();
@@ -219,11 +223,18 @@ public class Simulation extends Canvas{
         K[p.id-1] += p.vx*p.vx + p.vy*p.vy; 
         N[p.id-1]++;
       }
+      double tK = 0.0;
+      int tN = 0;
       for(int i=0; i<MAX_ID; i++) {
+        tK += K[i];
+        tN += N[i];
         if (N[i] > 0) K[i]/=N[i];
         Ke.get(i).add(K[i]);
         Np.get(i).add(N[i]);
       }
+      if (tN > 0) tK/=tN;
+      Ke.get(4).add(tK);
+      Np.get(4).add(tN);
     }
 
     public List getKe(int s) {
@@ -233,7 +244,7 @@ public class Simulation extends Canvas{
     void clear() {
       particles.clear();
       injectors.clear();
-      for (int i=0; i<MAX_ID; i++) {
+      for (int i=0; i<MAX_ID+1; i++) {
         Ke.get(i).clear();
         Np.get(i).clear();
       }
