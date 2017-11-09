@@ -21,8 +21,9 @@ class WindowDiagnostics extends JFrame implements ActionListener{
         this.setTitle("Diagnostics");
         this.parent = parent;
         this.simu = simu;
-        this.setLocation(100,10);
-        this.setBounds(0,0,500,400);
+        Point pL = parent.getLocationOnScreen();
+        Dimension pS = parent.getSize();
+        this.setBounds(pL.x+pS.width,pL.y,500,400);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	    this.setResizable(false);
         JPanel panel = new JPanel();

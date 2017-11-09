@@ -297,11 +297,13 @@ public class Simulation extends Canvas{
       for (Injector inj : injectors) {
 	      int id = inj.getId();
           if (id == 1) {
-	        g.setColor(Color.RED);
+	        g.setColor(MyColors.Id1);
           } else if (id == 2) {
-	        g.setColor(Color.GREEN);
+	        g.setColor(MyColors.Id2);
           } else if (id == 3) {
-	        g.setColor(Color.BLUE);
+	        g.setColor(MyColors.Id3);
+          } else if (id == 4) {
+	        g.setColor(MyColors.Id4);
           }
           int x1 = marginX + (int)((inj.getX1())/px);
           int y1 = marginY + (int)((inj.getY1())/px);
