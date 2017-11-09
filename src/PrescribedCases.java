@@ -68,29 +68,24 @@ public class PrescribedCases {
       simu.repaint();
     }
 
-    public void testInjector(Simulation simu) { 
+    public void diffusion(Simulation simu) { 
       simu.clear();
       double Lx = 10;
       double Ly = 10;
-      double Grav = 0.02;
-      double ecP = 0.8;
-      double ecW = 0.5;
+      double Grav = 0.00;
+      double ecP = 1.0;
+      double ecW = 1.0;
       double dt  = 0.1;
       simu.setL(Lx, Ly);
       simu.setGRA(Grav);
       simu.setECp(ecP);
       simu.setECw(ecW);
       simu.setDt(dt);
-      double x1 = 0;
-      double x2 = 1;
-      double y1 = 0;
-      double y2 = 1;
-      double vx = 0.2;
-      double vy = 0.0;
-      double vth = 0.01;
-      simu.addInjector(20 ,1 , 0.1  , x1, x2, y1, y2,  vx, vy, vth, 1);
+      simu.addParticles(300 , 0.1 , 0   , Lx/2, 0, Ly,  0, 0, 0.3, 1);
+      simu.addParticles(300 , 0.1 , Lx/2, Lx  , 0, Ly,  0, 0, 0.3, 4);
       simu.repaint();
     }
+
 
     public void thermalization(Simulation simu) { 
       simu.clear();
@@ -110,12 +105,31 @@ public class PrescribedCases {
       simu.repaint();
     }
 
+    public void brownian(Simulation simu) { 
+      simu.clear();
+      double Lx = 10;
+      double Ly = 10;
+      double Grav = 0.0;
+      double ecP = 1.0;
+      double ecW = 1.0;
+      double dt  = 0.1;
+      simu.setL(Lx, Ly);
+      simu.setGRA(Grav);
+      simu.setECp(ecP);
+      simu.setECw(ecW);
+      simu.setDt(dt);
+      simu.addParticles(400 , 0.15 , 0, Lx, 0, Ly,  0.0, 0.0, 0.2, 2);
+      simu.addParticles(1   , 0.4  , 4,  6, 4,  6,  0.0, 0.0, 0.2, 1);
+      simu.repaint();
+    }
+
+
     public void test(Simulation simu) { 
       simu.clear();
       double Lx = 10;
       double Ly = 10;
       double Grav = 0.02;
-      double ecP = 0.8;
+      double ecP = 1.0;
       double ecW = 0.5;
       double dt  = 0.1;
       simu.setL(Lx, Ly);
@@ -123,14 +137,8 @@ public class PrescribedCases {
       simu.setECp(ecP);
       simu.setECw(ecW);
       simu.setDt(dt);
-      double x1 = 0;
-      double x2 = 5;
-      double y1 = 0;
-      double y2 = 5;
-      double vx = 0.0;
-      double vy = 0.0;
-      double vth = 0.01;
-      simu.addParticles(100 , 0.1  , x1, x2, y1, y2,  vx, vy, vth, 1);
+      simu.addInjector(10, 5 , 0.1  , 8, 9, 0,  1, -0.4, 0, 0.1, 1);
+      //simu.addParticles(100 , 0.1  , x1, x2, y1, y2,  vx, vy, vth, 1);
       simu.repaint();
     }
 

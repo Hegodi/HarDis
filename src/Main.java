@@ -4,6 +4,8 @@
 ////                                                                        ////
 ////  Basic Molecular Dynamics simulation based on hard disks.              ////
 ////                                                                        ////
+////  Version 1.0                                                           ////
+////                                                                        ////
 ////  Diego Gonzalez                                                        ////
 ////  November 2017                                                         ////
 ////                                                                        ////
@@ -49,6 +51,8 @@ class Window extends JFrame {
     JMenuItem tc2MenuItem;
     JMenuItem tc3MenuItem;
     JMenuItem tc4MenuItem;
+    JMenuItem tc5MenuItem;
+    JMenuItem tc6MenuItem;
 
     JMenuItem manMenuItem;
     JMenuItem codMenuItem;
@@ -57,7 +61,7 @@ class Window extends JFrame {
     int cycles;   // Number of cycles
 
     public Window(int w, int h) {
-        this.setTitle("Hardis (Hard Disk simulation)");
+        this.setTitle("Hardis (Hard Disk simulation). Version 1.0");
         mainWindow = this;
         this.setLocation(0,0);
         this.setBounds(0,0,w,h);
@@ -112,9 +116,17 @@ class Window extends JFrame {
         tc3MenuItem.addActionListener(eventHandler);
         exaMenu.add(tc3MenuItem);
 
-        tc4MenuItem = new JMenuItem("Test");
+        tc4MenuItem = new JMenuItem("Diffusion");
         tc4MenuItem.addActionListener(eventHandler);
         exaMenu.add(tc4MenuItem);
+
+        tc5MenuItem = new JMenuItem("Brownian movement");
+        tc5MenuItem.addActionListener(eventHandler);
+        exaMenu.add(tc5MenuItem);
+
+        tc6MenuItem = new JMenuItem("Test");
+        tc6MenuItem.addActionListener(eventHandler);
+        exaMenu.add(tc6MenuItem);
 
         helMenu = new JMenu("Help");
 
@@ -262,6 +274,12 @@ class Window extends JFrame {
           cases.thermalization(simu);
           if (CckDia.isSelected()) winDia.clear();
         }else if (O == tc4MenuItem) {
+          cases.diffusion(simu);
+          if (CckDia.isSelected()) winDia.clear();
+        }else if (O == tc5MenuItem) {
+          cases.brownian(simu);
+          if (CckDia.isSelected()) winDia.clear();
+        }else if (O == tc6MenuItem) {
           cases.test(simu);
           if (CckDia.isSelected()) winDia.clear();
         }
