@@ -14,6 +14,7 @@ class WindowDiagnostics extends JFrame implements ActionListener{
     int Ncck;
     String title;
     Monitor monitor;
+    JLabel LblInf;
 
     public WindowDiagnostics(Window parent, Simulation simu) {
         this.setTitle("Diagnostics");
@@ -45,9 +46,14 @@ class WindowDiagnostics extends JFrame implements ActionListener{
         for(int i=0; i<Ncck; i++) {
           CckId[i].setSelected(true);
           CckId[i].addActionListener(this);
-          panel1.add(CckId[i]);
+        panel1.add(CckId[i]);
         }
         panel.add(panel1);
+
+        JPanel panel2 = new JPanel();
+        LblInf = new JLabel("Number of particles: " + simu.getNP());   
+        panel2.add(LblInf);
+        panel.add(panel2);        
 
         title = "KINETIC ENERGY";
 
@@ -55,6 +61,7 @@ class WindowDiagnostics extends JFrame implements ActionListener{
         //panelB.setPreferredSize(new Dimension(100,50));
         panelB.setLayout(new FlowLayout());
         panelB.add(BtnClo);        
+
         panel.add(panelB);
 
         this.add(panel);
@@ -78,6 +85,7 @@ class WindowDiagnostics extends JFrame implements ActionListener{
 
     public void updateValues() {
       monitor.updateValues();
+      LblInf.setText("Number of particles: " + simu.getNP());   
       monitor.update();
     }
 

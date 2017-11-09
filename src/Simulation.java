@@ -19,6 +19,7 @@ public class Simulation extends Canvas{
     private int cycle = 0;
     private List<Particle> particles = new ArrayList<>();  // List of all particles
     private List<Injector> injectors = new ArrayList<>();  // List of injectors
+    private List<Deleter>  deleters  = new ArrayList<>();  // List of deleters
     private double Lx, Ly;   // Size of the box
     private double px;       // Size of each pixel
     private double dt;       // Time step
@@ -82,9 +83,30 @@ public class Simulation extends Canvas{
       injectors.add(inj);
     }
 
+    public void addDeleter(double x1, double x2, double y1, double y2) {
+      Deleter del = new Deleter(x1, x2, y1, y2);
+      deleters.add(del);
+    }
+
+    public void removeParticles(int id, double x1, double x2, double y1, double y2) {
+      int n = particles.size();
+      int ind = 0;
+      for(int i=0; i<n; i++) {
+        Particle p = particles.get(ind);
+        if (p.rx > x1 && p.rx < x2 && p.ry > y1 && p.ry < y2 && p.id == id) {
+          particles.remove(ind);
+        } else {
+          ind++;
+        }
+      }
+    }
+
     void moveParticles() {
       for (Injector inj : injectors) {
         inj.inject(cycle, px, particles);
+      }
+      for (Deleter del : deleters) {
+        del.delete(particles);
       }
 
       int np = particles.size();
@@ -244,6 +266,7 @@ public class Simulation extends Canvas{
     void clear() {
       particles.clear();
       injectors.clear();
+      deleters.clear();
       for (int i=0; i<MAX_ID+1; i++) {
         Ke.get(i).clear();
         Np.get(i).clear();
@@ -273,6 +296,7 @@ public class Simulation extends Canvas{
     double getECp() {return ecPP;}
     double getECw() {return ecPW;}
     double getDt() {return dt;}
+    int getNP() {return particles.size();}
     int getCycle() {return cycle;}
 
     void setECw(double ecPW){ this.ecPW = ecPW;}
@@ -320,6 +344,15 @@ public class Simulation extends Canvas{
           int y1 = marginY + (int)((inj.getY1())/px);
           int x2 = marginX + (int)((inj.getX2())/px);
           int y2 = marginY + (int)((inj.getY2())/px);
+          g.fillRect(x1,y1,(x2-x1),(y2-y1));
+      }
+
+      for (Deleter del : deleters) {
+	      g.setColor(MyColors.Id5);
+          int x1 = marginX + (int)((del.getX1())/px);
+          int y1 = marginY + (int)((del.getY1())/px);
+          int x2 = marginX + (int)((del.getX2())/px);
+          int y2 = marginY + (int)((del.getY2())/px);
           g.fillRect(x1,y1,(x2-x1),(y2-y1));
       }
 

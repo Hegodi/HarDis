@@ -10,5 +10,6 @@ public class MyColors {
   public static String nameId2 = "Green";
   public static String nameId3 = "Blue";
   public static String nameId4 = "Yellow";
+  public static int MAX_IDS = 4;
 
 }

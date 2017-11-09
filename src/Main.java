@@ -42,8 +42,9 @@ class Window extends JFrame {
     JMenu exaMenu;
     JMenuItem addParMenuItem;
     JMenuItem addInjMenuItem;
-    JMenuItem addAbsMenuItem;
+    JMenuItem addDelMenuItem;
     JMenuItem addObsMenuItem;
+    JMenuItem remParMenuItem;
 
     JMenuItem genMenuItem;
 
@@ -99,9 +100,16 @@ class Window extends JFrame {
         addInjMenuItem.addActionListener(eventHandler);
         simMenu.add(addInjMenuItem);
 
-        addAbsMenuItem = new JMenuItem("Add absorbing area");
-        addAbsMenuItem.addActionListener(eventHandler);
-        simMenu.add(addAbsMenuItem);
+        addDelMenuItem = new JMenuItem("Add delter");
+        addDelMenuItem.addActionListener(eventHandler);
+        simMenu.add(addDelMenuItem);
+
+        simMenu.addSeparator();
+
+        remParMenuItem = new JMenuItem("Remove particles");
+        remParMenuItem.addActionListener(eventHandler);
+        simMenu.add(remParMenuItem);
+
 
         exaMenu = new JMenu("Examples");
         tc1MenuItem = new JMenuItem("Density 1");
@@ -207,14 +215,24 @@ class Window extends JFrame {
         simMenu.setEnabled(!val);
         exaMenu.setEnabled(!val);
         helMenu.setEnabled(!val);
-        if (val ) {
+        setMessage(val);
+    }   
+
+    void setMessage(boolean val) {
+      if (val) {
+        int np = simu.getNP();
+        if (np > 1000) {
+          LblInfo.setText("WARNING: too many particles -> " + np + " (" + cycles + " cycles)");
+          infoPanel.setBackground(Color.RED);
+        } else {
           LblInfo.setText("Running (" + cycles + " cycles)");
           infoPanel.setBackground(Color.GREEN);
-        } else {
-          LblInfo.setText("Stoped");
-          infoPanel.setBackground(Color.GRAY);
         }
-    }   
+      } else {
+        LblInfo.setText("Stoped");
+        infoPanel.setBackground(Color.GRAY);
+      }
+    }
  
     // Evente handler:
     class EventHandler implements ActionListener {
@@ -228,7 +246,7 @@ class Window extends JFrame {
               simu.moveParticles(); 
               cycles++;
               if (cycles % 10 == 0) {
-                LblInfo.setText("Running (" + cycles + " cycles)");
+                setMessage(true);
                 simu.diagnostics();
                 if (CckDia.isSelected()) winDia.updateValues();
               }
@@ -247,7 +265,7 @@ class Window extends JFrame {
         }else if (O == BtnStep) {
           simu.moveParticles(); 
           cycles++;
-          if (cycles % 10 == 0) LblInfo.setText("Running (" + cycles + " cycles)");
+          if (cycles % 10 == 0) setMessage(true);
         }else if (O == BtnReset) {
           cycles = 0;
           simu.clear();
@@ -262,8 +280,12 @@ class Window extends JFrame {
             WindowAddPart win = new WindowAddPart(mainWindow, simu);
         }else if (O == addInjMenuItem) {
             WindowAddInjector win = new WindowAddInjector(mainWindow, simu);
+        }else if (O == addDelMenuItem) {
+            WindowAddDeleter win = new WindowAddDeleter(mainWindow, simu);
         }else if (O == genMenuItem) {
             WindowSettings win = new WindowSettings(mainWindow, simu);
+        }else if (O == remParMenuItem) {
+            WindowRemovePart win = new WindowRemovePart(mainWindow, simu);
         }else if (O == tc1MenuItem) {
           cases.density1(simu);
           if (CckDia.isSelected()) winDia.clear();
