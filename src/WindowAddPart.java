@@ -46,10 +46,10 @@ class WindowAddPart extends JFrame implements ActionListener{
         Lx = simu.getLx();
         Ly = simu.getLy();
         String np  = Integer.toString(100);
-        String r   = Double.toString(0.3);
+        String r   = Double.toString(0.2);
         String vx  = Double.toString(0.0);
         String vy  = Double.toString(0.0);
-        String vth = Double.toString(0.1);
+        String vth = Double.toString(0.2);
         String x1  = Double.toString(0);
         String x2  = Double.toString(Lx);
         String y1  = Double.toString(0);
@@ -164,7 +164,7 @@ class WindowAddPart extends JFrame implements ActionListener{
           else if (strColor == MyColors.nameId4) id = 4;
 
 
-          simu.addParticles(n , R , x1, x2, (Ly-y2), (Ly-y1),  vx, vy, vth, id);
+          simu.addParticles(n , R , x1, x2, (Ly-y2), (Ly-y1),  vx, -vy, vth, id);
           simu.repaint();
           parent.setEnabled(true);
           this.dispose();

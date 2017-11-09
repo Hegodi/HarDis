@@ -48,13 +48,13 @@ class WindowAddInjector extends JFrame implements ActionListener{
         Ly = simu.getLy();
         String np  = Integer.toString(1);
         String r   = Double.toString(0.1);
-        String vx  = Double.toString(0.2);
+        String vx  = Double.toString(0.3);
         String vy  = Double.toString(0.0);
         String vth = Double.toString(0.1);
         String x1  = Double.toString(0);
-        String x2  = Double.toString(1.0);
-        String y1  = Double.toString(Ly-2);
-        String y2  = Double.toString(Ly-1);
+        String x2  = Double.toString(Lx/20);
+        String y1  = Double.toString(19*Ly/20);
+        String y2  = Double.toString(Ly);
         String freq = Integer.toString(10);
 
         JPanel panel0 = new JPanel();
@@ -176,7 +176,7 @@ class WindowAddInjector extends JFrame implements ActionListener{
           else if (strColor == MyColors.nameId4) id = 4;
 
 
-          simu.addInjector(freq, n , R , x1, x2, (Ly-y2), (Ly-y1),  vx, vy, vth, id);
+          simu.addInjector(freq, n , R , x1, x2, (Ly-y2), (Ly-y1),  vx, -vy, vth, id);
           simu.repaint();
           parent.setEnabled(true);
           this.dispose();

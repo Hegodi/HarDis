@@ -28,7 +28,7 @@ class Window extends JFrame {
 
     JButton BtnStart;
     JButton BtnStop;
-    JButton BtnReset;
+    JButton BtnClear;
     JButton BtnStep;
     JCheckBox CckDia;
     JLabel  LblInfo;
@@ -172,9 +172,9 @@ class Window extends JFrame {
         BtnStop.addActionListener(eventHandler);
         generalPanel.add(BtnStop);
 
-        BtnReset = new JButton("Reset");
-        BtnReset.addActionListener(eventHandler);
-        generalPanel.add(BtnReset);
+        BtnClear = new JButton("Clear");
+        BtnClear.addActionListener(eventHandler);
+        generalPanel.add(BtnClear);
 
         BtnStep = new JButton("Step");
         BtnStep.addActionListener(eventHandler);
@@ -210,7 +210,7 @@ class Window extends JFrame {
     void setButtons(boolean val) {
         BtnStart.setEnabled(!val);
         BtnStop.setEnabled(val);
-        BtnReset.setEnabled(!val);
+        BtnClear.setEnabled(!val);
         BtnStep.setEnabled(!val);
         simMenu.setEnabled(!val);
         exaMenu.setEnabled(!val);
@@ -266,7 +266,7 @@ class Window extends JFrame {
           simu.moveParticles(); 
           cycles++;
           if (cycles % 10 == 0) setMessage(true);
-        }else if (O == BtnReset) {
+        }else if (O == BtnClear) {
           cycles = 0;
           simu.clear();
           simu.update();
