@@ -63,8 +63,8 @@ public class PrescribedCases {
       simu.setECp(ecP);
       simu.setECw(ecW);
       simu.setDt(dt);
-      simu.addParticles(400 , 0.2 , 0, Lx, 4, Ly,      0, 0, 0.01, 3);
-      simu.addParticles(1   , 1.0 , 5, 5, Ly-1, Ly-1,  0, 0, 0.01, 2);
+      simu.addParticles(1   , 0.8 , 5, 5, Ly-1, Ly-1,  0, 0, 0.01, 2);
+      simu.addParticles(800 , 0.12 , 0, Lx, 4, Ly-1,      0, 0, 0.01, 3);
       simu.repaint();
     }
 
@@ -120,6 +120,27 @@ public class PrescribedCases {
       simu.setDt(dt);
       simu.addParticles(400 , 0.15 , 0, Lx, 0, Ly,  0.0, 0.0, 0.2, 2);
       simu.addParticles(1   , 0.4  , 4,  6, 4,  6,  0.0, 0.0, 0.2, 1);
+      simu.repaint();
+    }
+
+    public void shooting(Simulation simu) { 
+      simu.clear();
+      double Lx = 20;
+      double Ly = 10;
+      double Grav = 0.0;
+      double ecP = 0.5;
+      double ecW = 1.0;
+      double dt  = 0.05;
+      simu.setL(Lx, Ly);
+      simu.setGRA(Grav);
+      simu.setECp(ecP);
+      simu.setECw(ecW);
+      simu.setDt(dt);
+      simu.addParticles(400 , 0.15 , 3*Lx/4, Lx, 0, Ly,  0.0, 0.0, 0.0, 2);
+      //simu.addParticles(1 , 0.15 , 0,  1, 4.5,  5.5,  2.0, 0.0, 0.05, 1);
+      simu.addInjector(300, 1 , 0.05 , 0,  1, 4.5,  5.5,  2.0, 0.0, 0.05, 1);
+      simu.addDeleter(0,  3*Lx/4,  0.0, 0.2);
+      simu.addDeleter(0,  3*Lx/4,  Ly-0.2, Ly);
       simu.repaint();
     }
 

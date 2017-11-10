@@ -138,9 +138,11 @@ class WindowDiagnostics extends JFrame implements ActionListener{
         this.Y3 = new int[xlen];
         this.Y4 = new int[xlen];
         this.Y5 = new int[xlen];
-        this.Y = new int[Ncck][xlen];
+	    this.Y = new int[Ncck][xlen];
  
         this.scaT = 1;
+        this.ymax = 1.0;
+        this.ymin = 0.0;
         
         updateValues();
         
@@ -167,8 +169,12 @@ class WindowDiagnostics extends JFrame implements ActionListener{
             }
           }
         }
-        this.ymax = ((int)(max/0.1)+1)*0.1;
-        setScale(scaT, 0, ymax);
+        boolean done = false;
+        while (!done) {
+          done = true;
+          if (max < ymax/2) { setScale(scaT, 0, ymax/2); done = false; }
+          if (max > ymax)   { setScale(scaT, 0, 2*ymax); done = false; }
+        }
         for (int j=0; j<Ncck; j++) {
           if (parent.CckId[j].isSelected()) {
             int ct = simu.getKe(j).size();

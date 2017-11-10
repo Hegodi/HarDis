@@ -132,7 +132,7 @@ class Window extends JFrame {
         tc5MenuItem.addActionListener(eventHandler);
         exaMenu.add(tc5MenuItem);
 
-        tc6MenuItem = new JMenuItem("Test");
+        tc6MenuItem = new JMenuItem("Projectile");
         tc6MenuItem.addActionListener(eventHandler);
         exaMenu.add(tc6MenuItem);
 
@@ -302,7 +302,7 @@ class Window extends JFrame {
           cases.brownian(simu);
           if (CckDia.isSelected()) winDia.clear();
         }else if (O == tc6MenuItem) {
-          cases.test(simu);
+          cases.shooting(simu);
           if (CckDia.isSelected()) winDia.clear();
         }
       }
