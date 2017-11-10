@@ -70,8 +70,8 @@ public class PrescribedCases {
 
     public void diffusion(Simulation simu) { 
       simu.clear();
-      double Lx = 10;
-      double Ly = 10;
+      double Lx = 12;
+      double Ly = 4;
       double Grav = 0.00;
       double ecP = 1.0;
       double ecW = 1.0;
@@ -81,8 +81,8 @@ public class PrescribedCases {
       simu.setECp(ecP);
       simu.setECw(ecW);
       simu.setDt(dt);
-      simu.addParticles(300 , 0.1 , 0   , Lx/2, 0, Ly,  0, 0, 0.3, 1);
-      simu.addParticles(300 , 0.1 , Lx/2, Lx  , 0, Ly,  0, 0, 0.3, 4);
+      simu.addParticles(200 , 0.1  , 0   , Lx/2+0.1, 0, Ly,  0, 0, 0.3, 1);
+      simu.addParticles(200 , 0.1  , Lx/2-0.1, Lx  , 0, Ly,  0, 0, 0.0, 4);
       simu.repaint();
     }
 

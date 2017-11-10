@@ -262,6 +262,9 @@ public class Simulation extends Canvas{
     public List getKe(int s) {
       return Ke.get(s);
     }
+    public List getNp(int s) {
+      return Np.get(s);
+    }
 
     void clear() {
       particles.clear();

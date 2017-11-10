@@ -42,7 +42,7 @@ class WindowDiagnostics extends JFrame implements ActionListener{
         CckId[1] = new JCheckBox(MyColors.nameId2);
         CckId[2] = new JCheckBox(MyColors.nameId3);
         CckId[3] = new JCheckBox(MyColors.nameId4);
-        CckId[4] = new JCheckBox("All");
+        CckId[4] = new JCheckBox("Avergage");
         for(int i=0; i<Ncck; i++) {
           CckId[i].setSelected(true);
           CckId[i].addActionListener(this);
@@ -184,11 +184,11 @@ class WindowDiagnostics extends JFrame implements ActionListener{
               if (i % scaT == 0) {
                 Y[j][n] = y0 + ylen - (int)(K.get(i)*scaY);
                 n++;
+                if (n >= xlen) {
+                  this.scaT *= 2;
+                  updateValues();
+                }
               }
-            }
-            if (n >= xlen) {
-              this.scaT *= 2;
-              updateValues();
             }
           }
         }

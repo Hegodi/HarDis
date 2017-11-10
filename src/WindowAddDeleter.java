@@ -7,7 +7,7 @@ class WindowAddDeleter extends JFrame implements ActionListener{
     Simulation simu;
     Window parent;
 
-    JButton BtnRem;
+    JButton BtnAdd;
     JButton BtnCan;
 
     JTextField TxtX1;
@@ -29,9 +29,9 @@ class WindowAddDeleter extends JFrame implements ActionListener{
 
         parent.setEnabled(false);
 
-        BtnRem = new JButton("Remove");
+        BtnAdd = new JButton("Add");
         BtnCan = new JButton("Cancel");
-        BtnRem.addActionListener(this);
+        BtnAdd.addActionListener(this);
         BtnCan.addActionListener(this);
 
         JLabel lbl1, lbl2, lbl3, lbl4;
@@ -68,7 +68,7 @@ class WindowAddDeleter extends JFrame implements ActionListener{
 
         JPanel panelB = new JPanel();
         panelB.setLayout(new FlowLayout());
-        panelB.add(BtnRem);        
+        panelB.add(BtnAdd);        
         panelB.add(BtnCan);        
         panel.add(panelB);
 
@@ -86,7 +86,7 @@ class WindowAddDeleter extends JFrame implements ActionListener{
 
     public void actionPerformed(ActionEvent e) {
         Object O = e.getSource();
-        if (O == BtnRem) {
+        if (O == BtnAdd) {
           double x1 = Double.valueOf(TxtX1.getText());
           double x2 = Double.valueOf(TxtX2.getText());
           double y1 = Double.valueOf(TxtY1.getText());
