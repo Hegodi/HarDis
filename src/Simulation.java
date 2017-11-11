@@ -266,6 +266,14 @@ public class Simulation extends Canvas{
       return Np.get(s);
     }
 
+    public List getInjectors() {
+      return injectors;
+    }
+
+    public List getDeleter() {
+      return deleters;
+    }
+
     void clear() {
       particles.clear();
       injectors.clear();

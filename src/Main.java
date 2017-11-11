@@ -45,6 +45,7 @@ class Window extends JFrame {
     JMenuItem addDelMenuItem;
     JMenuItem addObsMenuItem;
     JMenuItem remParMenuItem;
+    JMenuItem remInjMenuItem;
 
     JMenuItem genMenuItem;
 
@@ -109,6 +110,10 @@ class Window extends JFrame {
         remParMenuItem = new JMenuItem("Remove particles");
         remParMenuItem.addActionListener(eventHandler);
         simMenu.add(remParMenuItem);
+
+        remInjMenuItem = new JMenuItem("Remove injector");
+        remInjMenuItem.addActionListener(eventHandler);
+        simMenu.add(remInjMenuItem);
 
 
         exaMenu = new JMenu("Examples");
@@ -286,6 +291,8 @@ class Window extends JFrame {
             WindowSettings win = new WindowSettings(mainWindow, simu);
         }else if (O == remParMenuItem) {
             WindowRemovePart win = new WindowRemovePart(mainWindow, simu);
+        }else if (O == remInjMenuItem) {
+            WindowRemoveInjector win = new WindowRemoveInjector(mainWindow, simu);
         }else if (O == tc1MenuItem) {
           cases.density1(simu);
           if (CckDia.isSelected()) winDia.clear();
