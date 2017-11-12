@@ -37,7 +37,7 @@ class Window extends JFrame {
     WindowDiagnostics winDia;
 
     JMenuBar menuBar;
-    JMenu helMenu;
+    JMenu aboMenu;
     JMenu simMenu;
     JMenu exaMenu;
     JMenuItem addParMenuItem;
@@ -141,20 +141,16 @@ class Window extends JFrame {
         tc6MenuItem.addActionListener(eventHandler);
         exaMenu.add(tc6MenuItem);
 
-        helMenu = new JMenu("Help");
+        aboMenu = new JMenu("About");
 
-
-        manMenuItem = new JMenuItem("Manual");
-        manMenuItem.addActionListener(eventHandler);
-        helMenu.add(manMenuItem);
 
         codMenuItem = new JMenuItem("About the code");
         codMenuItem.addActionListener(eventHandler);
-        helMenu.add(codMenuItem);
+        aboMenu.add(codMenuItem);
 
         menuBar.add(simMenu);
         menuBar.add(exaMenu);
-        menuBar.add(helMenu);
+        menuBar.add(aboMenu);
 
         this.setJMenuBar(menuBar);
 
@@ -219,7 +215,7 @@ class Window extends JFrame {
         BtnStep.setEnabled(!val);
         simMenu.setEnabled(!val);
         exaMenu.setEnabled(!val);
-        helMenu.setEnabled(!val);
+        aboMenu.setEnabled(!val);
         setMessage(val);
     }   
 
@@ -311,6 +307,11 @@ class Window extends JFrame {
         }else if (O == tc6MenuItem) {
           cases.shooting(simu);
           if (CckDia.isSelected()) winDia.clear();
+        }else if (O == tc6MenuItem) {
+          cases.shooting(simu);
+          if (CckDia.isSelected()) winDia.clear();
+        } else if (O == codMenuItem ) {
+          WindowAbout win = new WindowAbout(mainWindow);
         }
       }
     }
