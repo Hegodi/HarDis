@@ -101,6 +101,20 @@ public class Simulation extends Canvas{
       }
     }
 
+    public void removeInjector(int index) {
+      int n = injectors.size();
+      for(int i=0; i<n; i++) {
+        if (i == index) injectors.remove(i);
+      }
+    }
+
+    public void removeDeleter(int index) {
+      int n = deleters.size();
+      for(int i=0; i<n; i++) {
+        if (i == index) deleters.remove(i);
+      }
+    }
+
     void moveParticles() {
       for (Injector inj : injectors) {
         inj.inject(cycle, px, particles);
@@ -270,7 +284,11 @@ public class Simulation extends Canvas{
       return injectors;
     }
 
-    public List getDeleter() {
+    public int getNumberInj() {
+      return injectors.size();
+    }
+
+    public List getDeleters() {
       return deleters;
     }
 

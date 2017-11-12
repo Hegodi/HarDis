@@ -158,7 +158,12 @@ public class PrescribedCases {
       simu.setECp(ecP);
       simu.setECw(ecW);
       simu.setDt(dt);
-      simu.addInjector(10, 5 , 0.1  , 8, 9, 0,  1, -0.4, 0, 0.1, 1);
+      simu.addInjector(10, 1 , 0.1  , 8, 9, 0,  1, -0.4, 0, 0.1, 1);
+      simu.addInjector(10, 1 , 0.1  , 2, 3, 0,  1, -0.4, 0, 0.1, 2);
+      simu.addInjector(10, 1 , 0.1  , 2, 3, 4,  5, -0.4, 0, 0.1, 3);
+      simu.addInjector(10, 1 , 0.1  , 4, 6, 8,  9, -0.4, 0, 0.1, 4);
+      simu.addDeleter( 0, 1, 0,  1);
+      simu.addDeleter( 0, 1, 9,  10);
       //simu.addParticles(100 , 0.1  , x1, x2, y1, y2,  vx, vy, vth, 1);
       simu.repaint();
     }

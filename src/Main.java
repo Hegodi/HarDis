@@ -111,7 +111,7 @@ class Window extends JFrame {
         remParMenuItem.addActionListener(eventHandler);
         simMenu.add(remParMenuItem);
 
-        remInjMenuItem = new JMenuItem("Remove injector");
+        remInjMenuItem = new JMenuItem("Remove elements");
         remInjMenuItem.addActionListener(eventHandler);
         simMenu.add(remInjMenuItem);
 
@@ -292,7 +292,7 @@ class Window extends JFrame {
         }else if (O == remParMenuItem) {
             WindowRemovePart win = new WindowRemovePart(mainWindow, simu);
         }else if (O == remInjMenuItem) {
-            WindowRemoveInjector win = new WindowRemoveInjector(mainWindow, simu);
+            WindowRemoveElements win = new WindowRemoveElements(mainWindow, simu);
         }else if (O == tc1MenuItem) {
           cases.density1(simu);
           if (CckDia.isSelected()) winDia.clear();
