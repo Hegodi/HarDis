@@ -27,7 +27,7 @@ class WindowAddPart extends JFrame implements ActionListener{
         this.setTitle("Add particles");
         this.parent = parent;
         this.simu = simu;
-        this.setLocation(0,0);
+
         //this.setBounds(0,0,460,200);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	    this.setResizable(false);
@@ -134,6 +134,11 @@ class WindowAddPart extends JFrame implements ActionListener{
 
         this.add(panel);
         this.pack();
+
+        Point pL = parent.getLocationOnScreen();
+        Dimension pS = parent.getSize();
+        Dimension mS = this.getSize();
+        this.setLocation(pL.x+pS.width/2 - mS.width/2, pL.y+pS.height/2 - mS.height/2);
         this.setVisible(true);
 
         this.addWindowListener(new WindowAdapter()

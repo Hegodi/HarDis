@@ -50,6 +50,11 @@ class WindowRemoveElements extends JFrame implements ActionListener{
 
         this.add(panel);
         this.pack();
+
+        Point pL = parent.getLocationOnScreen();
+        Dimension pS = parent.getSize();
+        Dimension mS = this.getSize();
+        this.setLocation(pL.x+pS.width/2 - mS.width/2, pL.y+pS.height/2 - mS.height/2);
         this.setVisible(true);
 
         updateList();
