@@ -6,6 +6,19 @@
 ****  Diego Gonzalez (diegonher@gmail.com)                      ****
 ****  Novemeber 2017                                            ****
 ****                                                            ****
+****  License: GPL (see COPYING)                                ****
+****                                                            ****
 ********************************************************************
 Basic molecular dynamics simulations based on hard disks (2D).
+
+Executable:  Hardis.jar is ready to be executed in a devide with
+             java installed.
+
+Compilation: to compile from the source code:
+           - Go to src/
+           - type "make". This will generated the *.class files in 
+             the class folder.
+           - Go to root folder and execute: "sh MakeJar.b" 
+           - Then the file Hardis.har should be created in the 
+             same folder.
 
