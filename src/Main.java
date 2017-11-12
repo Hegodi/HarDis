@@ -101,7 +101,7 @@ class Window extends JFrame {
         addInjMenuItem.addActionListener(eventHandler);
         simMenu.add(addInjMenuItem);
 
-        addDelMenuItem = new JMenuItem("Add delter");
+        addDelMenuItem = new JMenuItem("Add deleter");
         addDelMenuItem.addActionListener(eventHandler);
         simMenu.add(addDelMenuItem);
 

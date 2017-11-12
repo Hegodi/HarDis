@@ -23,6 +23,7 @@ class WindowDiagnostics extends JFrame implements ActionListener{
         Point pL = parent.getLocationOnScreen();
         Dimension pS = parent.getSize();
         this.setBounds(pL.x+pS.width,pL.y,500,400);
+        this.setPreferredSize(new Dimension(500,420));
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	    this.setResizable(false);
         JPanel panel = new JPanel();
@@ -42,7 +43,7 @@ class WindowDiagnostics extends JFrame implements ActionListener{
         CckId[1] = new JCheckBox(MyColors.nameId2);
         CckId[2] = new JCheckBox(MyColors.nameId3);
         CckId[3] = new JCheckBox(MyColors.nameId4);
-        CckId[4] = new JCheckBox("Avergage");
+        CckId[4] = new JCheckBox("Average");
         for(int i=0; i<Ncck; i++) {
           CckId[i].setSelected(true);
           CckId[i].addActionListener(this);
@@ -65,7 +66,7 @@ class WindowDiagnostics extends JFrame implements ActionListener{
         panel.add(panelB);
 
         this.add(panel);
-        //this.pack();
+        this.pack();
         this.setVisible(true);
         monitor.init();
 
