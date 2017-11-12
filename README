@@ -10,6 +10,11 @@
 ****                                                            ****
 ********************************************************************
 Basic molecular dynamics simulations based on hard disks (2D).
+It uses hard spheres model (hard disks in 2D) with a time-driven 
+algorithm.
+
+
+
 
 Executable:  Hardis.jar is ready to be executed in a devide with
              java installed.
